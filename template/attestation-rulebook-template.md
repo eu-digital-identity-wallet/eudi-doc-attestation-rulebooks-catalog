@@ -1,3 +1,5 @@
+* Template version: 1.1, 20-08-2025
+
 
 # Attestation Rulebook for attestations of type  *ADD THE ATTESTATION TYPE HERE*
 
@@ -203,8 +205,6 @@ and the Relying Party are in proximity and attestations are presented without
 using the internet. If so,the attestations must be issued in the ISO/IEC 18013-5-compliant 
 mdoc format.*
 
-
-
 *Furthermore, in this section a document type SHALL be defined, which SHALL be 
 unique within the scope of the EUDI Wallet ecosystem (see ARB_05 in [Topic 12]).*
 
@@ -280,12 +280,12 @@ Finally, illustrative examples SHALL be included.
 [RULEBOOK AUTHOR TO PROVIDE THE ATTRIBUTES AND THEIR VALUES INCLUDED IN THE EXAMPLE]
 
 ### 3.2 SD-JWT VC-based encoding 
-*If the attestation type supports the the format specified in "SD-JWT-based Verifiable 
-Credentials (SD-JWT VC)", then in this section the  SD-JWT VC-compliant encoding 
-of attributes and metadata should be defined. It SHALL be ensured that the attestations 
+*If the attestation type supports the format specified in "SD-JWT-based Verifiable 
+Credentials (SD-JWT VC)", then in this section the SD-JWT VC-compliant encoding 
+of attributes and metadata SHALL be defined. It SHALL be ensured that the attestations 
 comply with the 'SD-JWT VCs' profile specified in [HAIP] (see ARB_01b in [Topic 12]).*
 
-*It is noted that a  Schema Provider MAY specify in the Attestation 
+*It is noted that a Schema Provider MAY specify in the Attestation 
 Rulebook that that type of attestation must be issued in the [SD-JWT VC]-compliant 
 format, provided the [SD-JWT VC] specification has been approved by an EU standardisation 
 body or by the European Digital Identity Cooperation Group established pursuant to 
@@ -296,7 +296,7 @@ which SHALL be unique within the scope of the EUDI Wallet ecosystem (see ARB_05 
 
 [RULEBOOK AUTHOR TO DEFINE THE ATTESTATION TYPE]
 
-*Additionally,  when specifying new attributes existing conventions 
+*Additionally, when specifying new attributes existing conventions 
 for attribute identifier values and attribute syntaxes SHOULD
 be considered (see ARB_07 in [Topic 12]).*
 
