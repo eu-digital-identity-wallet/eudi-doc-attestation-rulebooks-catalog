@@ -1,3 +1,5 @@
+* Template version: 1.1, 20-08-2025
+
 
 # Attestation Rulebook for attestations of type  *ADD THE ATTESTATION TYPE HERE*
 
@@ -41,7 +43,7 @@ sections of the Rulebook SHOULD be*
 encoding-independent manner. 
 - Chapter 3, which specifies how the attestation
 attributes and metadata are encoded in case the attestation complies with [ISO/IEC
-18013-5] and/or [SD-JWT VC] and/or [W3C VCDM v2.0]. 
+18013-5] and/or [SD-JWT VC] and/or [W3C VCDM v2.0]. Each encoding SHALL be specified in a separate section, or even in a separate chapter.
 - Chapter 4, which specifies attestation usage.
 - Chapter 5, which defines trust anchors
 - Chapter 6, which defines revocation mechanisms
@@ -70,7 +72,7 @@ This document uses the terminology specified in Annex 1 of the ARF.
 
 ## 2 Attestation attributes and metadata
 
-*This section is used for defining all attributes than an
+*This section is used for defining all attributes that an
 attestation of the defined type may contain. In this section
 the attributes SHALL be defined in an encoding-independent manner (see ARB_06 in [Topic 12]). 
 Each attribute can be mandatory, optional, or conditional
@@ -148,7 +150,7 @@ provide a table of the following form:*
 | *Provide a unique attribute identifier* | *Briefly describe the semantic of this attribute*|*Provide a type, e.g., integer, string, boolean, date.*|*Give an example value*
 
 *NOTE Data identifiers should be unambiguous, machine-readable where possible, and 
-avoid natural language ambiguities.*
+avoid natural-language ambiguities.*
 
 
 ### 2.2 Mandatory attributes
@@ -203,8 +205,6 @@ and the Relying Party are in proximity and attestations are presented without
 using the internet. If so,the attestations must be issued in the ISO/IEC 18013-5-compliant 
 mdoc format.*
 
-
-
 *Furthermore, in this section a document type SHALL be defined, which SHALL be 
 unique within the scope of the EUDI Wallet ecosystem (see ARB_05 in [Topic 12]).*
 
@@ -246,7 +246,7 @@ of each attribute.*
 
 *Additionally, the following rules should be followed:*
 
-* When specifying new attributes existing conventions 
+* When specifying new attributes, existing conventions 
 for attribute identifier values and attribute syntaxes SHOULD
 be considered (see ARB_07 in [Topic 12]).
 * Each attribute SHALL be defined within an attribute namespace. 
@@ -270,8 +270,6 @@ in Section 2.1 SHALL be:*
 | **Data Identifier** | **Attribute identifier** | **Encoding format** |**Namespace**|
 |------------------------|--------------|------------------|------------------|
 | attestation_legal_category | attestation_legal_category | tstr |com.example.att.1|
- 
-
 
 Finally, illustrative examples SHALL be included. 
 
@@ -280,12 +278,12 @@ Finally, illustrative examples SHALL be included.
 [RULEBOOK AUTHOR TO PROVIDE THE ATTRIBUTES AND THEIR VALUES INCLUDED IN THE EXAMPLE]
 
 ### 3.2 SD-JWT VC-based encoding 
-*If the attestation type supports the the format specified in "SD-JWT-based Verifiable 
-Credentials (SD-JWT VC)", then in this section the  SD-JWT VC-compliant encoding 
-of attributes and metadata should be defined. It SHALL be ensured that the attestations 
+*If the attestation type supports the format specified in "SD-JWT-based Verifiable 
+Credentials (SD-JWT VC)", then in this section the SD-JWT VC-compliant encoding 
+of attributes and metadata SHALL be defined. It SHALL be ensured that the attestations 
 comply with the 'SD-JWT VCs' profile specified in [HAIP] (see ARB_01b in [Topic 12]).*
 
-*It is noted that a  Schema Provider  MAY specify in the Attestation 
+*It is noted that a Schema Provider MAY specify in the Attestation 
 Rulebook that that type of attestation must be issued in the [SD-JWT VC]-compliant 
 format, provided the [SD-JWT VC] specification has been approved by an EU standardisation 
 body or by the European Digital Identity Cooperation Group established pursuant to 
@@ -296,35 +294,51 @@ which SHALL be unique within the scope of the EUDI Wallet ecosystem (see ARB_05 
 
 [RULEBOOK AUTHOR TO DEFINE THE ATTESTATION TYPE]
 
-*Additionally,  when specifying new attributes existing conventions 
+*Additionally, when specifying new attributes, existing conventions 
 for attribute identifier values and attribute syntaxes SHOULD
 be considered (see ARB_07 in [Topic 12]).*
 
-*It SHALL be ensured that each claim name is either included in the IANA registry 
-for JWT claims, or is a Public Name as defined in [RFC 7519] (see ARB_06b in [Topic 12]).* 
+*Rulebook authors SHALL ensure that each claim name is either 
+- included in the IANA registry for JWT claims,
+- is a Public Name as defined in [RFC 7519], or
+- or is a Private Name specific to the attestation type. (see ARB_06b in [Topic 12]).*
 
-*IANA registered claims should be presented in table that
+*For all claims (i.e., all top-level properties, all nested properties, and all array entries), 
+the Rulebook SHALL specify whether an Attestation Provider MUST, MAY, or MUST NOT make that
+claim selectively disclosable (see ARB_30 in [Topic 12]).*
+
+*Rulebook authors SHOULD consider defining a Type Metadata Document for the attestation type 
+specified in the Rulebook, as defined in Chapter 6 of [SD-JWT VC]. If such a document is defined,
+it SHOULD contain the Claim Selective Disclosure Metadata (defined in Section 9.3 of [SD-JWT VC]) 
+for each of the claims, in order to specify if that claim is selectively disclosable (see ARB_31 
+in [Topic 12]).*
+
+*Rulebook authors SHOULD consider defining a JSON Schema for the attestation type specified
+in the Rulebook, as defined in Section 6.5 of [SD-JWT VC], and include or reference that 
+Schema in the Type Metadata Document meant in ARB_31 (see ARB_32 in [Topic 12]).*
+
+*IANA-registered claims should be presented in table that
 includes their data identifier, attribute identifier, 
 encoding format, and reference or note. For example,*
 
-| **Data Identifier** | **Attribute identifier** | **Encoding format** |**Reference/Notes** |
-|-------------------- |--------------------------|---------------------|--------------------|
-| family_name | family_name | string | Section 5.1 of [OIDC] |
+| **Data Identifier** | **Attribute identifier** | **Encoding format** |**Reference/Notes** |**Disclosable**|
+|-------------------- |--------------------------|---------------------|--------------------|---------------|
+| family_name | family_name | string | Section 5.1 of [OIDC] | MUST |
 
-*A similar table should be used for Private Names specific
+*A similar table should be used for Public Names and for Private Names specific
 to the attestation type defined in this document. For
 example:*
 
-| **Data Identifier** | **Attribute identifier** | **Encoding format** | **Notes** |
-|---------------------|--------------------------|---------------------|-----------|
-| trust_anchor | trust_anchor | string | The trust anchor defined in Section 5|
+| **Data Identifier** | **Attribute identifier** | **Encoding format** | **Notes** |**Disclosable**|
+|---------------------|--------------------------|---------------------|-----------|---------------|
+| trust_anchor | trust_anchor | string | The trust anchor defined in Section 5 | MUST NOT |
 
 *The corresponding entry for the "attestation_legal_category" attribute defined
 in Section 2.1 SHALL be:*
 
-| **Data Identifier** | **Attribute identifier** | **Encoding format** | **Notes** |
-|---------------------|--------------------------|---------------------|-----------|
-| attestation_legal_category | attestation_legal_category | string | Defined in Attestation Rulebook template |
+| **Data Identifier** | **Attribute identifier** | **Encoding format** | **Notes** |**Disclosable**|
+|---------------------|--------------------------|---------------------|-----------|---------------|
+| attestation_legal_category | attestation_legal_category | string | Defined in Attestation Rulebook template |MUST NOT|
 
 
 Finally, illustrative examples SHALL be included. 
