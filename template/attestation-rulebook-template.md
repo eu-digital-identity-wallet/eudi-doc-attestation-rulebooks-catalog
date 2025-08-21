@@ -321,24 +321,24 @@ Schema in the Type Metadata Document meant in ARB_31 (see ARB_32 in [Topic 12]).
 includes their data identifier, attribute identifier, 
 encoding format, and reference or note. For example,*
 
-| **Data Identifier** | **Attribute identifier** | **Encoding format** |**Reference/Notes** |
-|-------------------- |--------------------------|---------------------|--------------------|
-| family_name | family_name | string | Section 5.1 of [OIDC] |
+| **Data Identifier** | **Attribute identifier** | **Encoding format** |**Reference/Notes** |**Disclosable**|
+|-------------------- |--------------------------|---------------------|--------------------|---------------|
+| family_name | family_name | string | Section 5.1 of [OIDC] | MUST|
 
 *A similar table should be used for Private Names specific
 to the attestation type defined in this document. For
 example:*
 
-| **Data Identifier** | **Attribute identifier** | **Encoding format** | **Notes** |
-|---------------------|--------------------------|---------------------|-----------|
-| trust_anchor | trust_anchor | string | The trust anchor defined in Section 5|
+| **Data Identifier** | **Attribute identifier** | **Encoding format** | **Notes** |**Disclosable**|
+|---------------------|--------------------------|---------------------|-----------|---------------|
+| trust_anchor | trust_anchor | string | The trust anchor defined in Section 5|MUST NOT|
 
 *The corresponding entry for the "attestation_legal_category" attribute defined
 in Section 2.1 SHALL be:*
 
-| **Data Identifier** | **Attribute identifier** | **Encoding format** | **Notes** |
-|---------------------|--------------------------|---------------------|-----------|
-| attestation_legal_category | attestation_legal_category | string | Defined in Attestation Rulebook template |
+| **Data Identifier** | **Attribute identifier** | **Encoding format** | **Notes** |**Disclosable**|
+|---------------------|--------------------------|---------------------|-----------|---------------|
+| attestation_legal_category | attestation_legal_category | string | Defined in Attestation Rulebook template |MUST NOT|
 
 
 Finally, illustrative examples SHALL be included. 
