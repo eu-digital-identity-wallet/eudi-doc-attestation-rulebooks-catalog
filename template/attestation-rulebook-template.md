@@ -246,7 +246,7 @@ of each attribute.*
 
 *Additionally, the following rules should be followed:*
 
-* When specifying new attributes existing conventions 
+* When specifying new attributes, existing conventions 
 for attribute identifier values and attribute syntaxes SHOULD
 be considered (see ARB_07 in [Topic 12]).
 * Each attribute SHALL be defined within an attribute namespace. 
@@ -270,8 +270,6 @@ in Section 2.1 SHALL be:*
 | **Data Identifier** | **Attribute identifier** | **Encoding format** |**Namespace**|
 |------------------------|--------------|------------------|------------------|
 | attestation_legal_category | attestation_legal_category | tstr |com.example.att.1|
- 
-
 
 Finally, illustrative examples SHALL be included. 
 
@@ -296,12 +294,14 @@ which SHALL be unique within the scope of the EUDI Wallet ecosystem (see ARB_05 
 
 [RULEBOOK AUTHOR TO DEFINE THE ATTESTATION TYPE]
 
-*Additionally, when specifying new attributes existing conventions 
+*Additionally, when specifying new attributes, existing conventions 
 for attribute identifier values and attribute syntaxes SHOULD
 be considered (see ARB_07 in [Topic 12]).*
 
-*It SHALL be ensured that each claim name is either included in the IANA registry 
-for JWT claims, or is a Public Name as defined in [RFC 7519] (see ARB_06b in [Topic 12]).*
+*Rulebook authors SHALL ensure that each claim name is either 
+- included in the IANA registry for JWT claims,
+- is a Public Name as defined in [RFC 7519], or
+- or is a Private Name specific to the attestation type. (see ARB_06b in [Topic 12]).*
 
 *For all claims (i.e., all top-level properties, all nested properties, and all array entries), 
 the Rulebook SHALL specify whether an Attestation Provider MUST, MAY, or MUST NOT make that
@@ -323,15 +323,15 @@ encoding format, and reference or note. For example,*
 
 | **Data Identifier** | **Attribute identifier** | **Encoding format** |**Reference/Notes** |**Disclosable**|
 |-------------------- |--------------------------|---------------------|--------------------|---------------|
-| family_name | family_name | string | Section 5.1 of [OIDC] | MUST|
+| family_name | family_name | string | Section 5.1 of [OIDC] | MUST |
 
-*A similar table should be used for Private Names specific
+*A similar table should be used for Public Names and for Private Names specific
 to the attestation type defined in this document. For
 example:*
 
 | **Data Identifier** | **Attribute identifier** | **Encoding format** | **Notes** |**Disclosable**|
 |---------------------|--------------------------|---------------------|-----------|---------------|
-| trust_anchor | trust_anchor | string | The trust anchor defined in Section 5|MUST NOT|
+| trust_anchor | trust_anchor | string | The trust anchor defined in Section 5 | MUST NOT |
 
 *The corresponding entry for the "attestation_legal_category" attribute defined
 in Section 2.1 SHALL be:*
