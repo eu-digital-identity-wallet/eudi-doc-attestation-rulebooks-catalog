@@ -78,10 +78,10 @@ All data identifiers and definitions in this chapter are independent of any
 encoding used. Consequently,
 
 - the data identifiers in these tables are not necessarily the same as the
-attribute identifiers used for PIDs complying with [ISO/IEC 18013-5]. [Chapter 3](#3-isoiec-18013-5-compliant-encoding-of-pid) specifies the data element
+attribute identifiers used for PIDs complying with [ISO/IEC 18013-5]. [Chapter 3](#3-isoiec-18013-5-compliant-encoding-of-pid) specifies the attribute
 identifiers to be used for PIDs in [ISO/IEC 18013-5] format
 - the data identifiers in these tables are not necessarily the same as the claim
-names used for PIDs complying with [SD-JWT VC]. [Chapter 4](#4-sd-jwt-vc-based-encoding-of-pid) specifies the attribute identifiers to be
+names used for PIDs complying with [SD-JWT VC]. [Chapter 4](#4-sd-jwt-vc-based-encoding-of-pid) specifies the claim names to be
 used for such PIDs.
 
 ### 2.2 Mandatory attributes specified in CIR 2024/2977
@@ -153,18 +153,17 @@ presentation requests and responses according to [ISO/IEC 18013-5].
 - The third column indicates the encoding of each attribute. This column uses
 CDDL representation types defined in [RFC 8610]. The following notes and
 requirements apply:
-    - tstr, uint, bstr, bool and tdate are CDDL representation types defined in
-  [RFC 8610].
-    - Regarding type tstr: this document confirms that, as specified in RFC
-    8949, a tstr SHALL be encoded in UTF-8 and SHALL support the full Unicode
+    - ``tstr``, ``uint``, ``bstr``, ``bool`` and ``tdate`` are CDDL representation types defined in [RFC 8610].
+    - Regarding type ``tstr``: this document confirms that, as specified in RFC
+    8949, a ``tstr`` SHALL be encoded in UTF-8 and SHALL support the full Unicode
     range.
-    - All attributes having encoding type tstr SHALL have a maximum length of
+    - All attributes having encoding type ``tstr`` SHALL have a maximum length of
     150 characters.
-    - This document specifies full-date as full-date = #6.1004(tstr), where tag
+    - This document specifies ``full-date`` as ``full-date = #6.1004(tstr)``, where tag
     1004 is specified in [RFC 8943].
-    - In accordance with [RFC 8949], section 3.4.1, a tdate attribute SHALL
+    - In accordance with [RFC 8949], section 3.4.1, a ``tdate`` attribute SHALL
     contain a date-time string as specified in [RFC 3339]. In accordance with
-    [RFC 8943], a full-date attribute SHALL contain a full-date string as
+    [RFC 8943], a ``full-date`` attribute SHALL contain a full-date string as
     specified in [RFC 3339].
     - The following requirements apply to the representation of dates in
     attributes, unless otherwise indicated:
@@ -175,50 +174,48 @@ requirements apply:
     those rules SHALL be implemented for all CBOR structures in PIDs, as
     follows:
         - integers (major types 0 and 1) SHALL be as small as possible;
-        - the expression of the length in a bstr, tstr, array or map SHALL be as
+        - the expression of the length in a ``bstr``, ``tstr``, array or map SHALL be as
         short as possible;
         - indefinite-length items SHALL be made into definite-length items.
 
 | **Data Identifier** | **Attribute identifier** | **Encoding format** |
 |------------------------|--------------|------------------|
-| family_name | family_name | tstr |
-| given_name | given_name | tstr |
-| birth_date | birth_date | full-date, see [Section 3.1.4](#314-attribute-birth_date). |
-| birth_place | place_of_birth | See [Section 3.1.5](#315-attribute-place_of_birth). |
-| nationality | nationality | nationalities, see [Section 3.1.2](#312-attribute-nationality). |
-| resident_address | resident_address | tstr |
-| resident_country | resident_country | tstr |
-| resident_state | resident_state | tstr |
-| resident_city | resident_city | tstr |
-| resident_postal_code | resident_postal_code | tstr |
-| resident_street | resident_street | tstr |
-| resident_house_number | resident_house_number | tstr |
-| personal_administrative_number | personal_administrative_number | tstr |
-| portrait | portrait | bstr |
-| family_name_birth | family_name_birth | tstr |
-| given_name_birth | given_name_birth | tstr |
-| sex | sex | uint |
-| email_address | email_address | tstr |
-| mobile_phone_number | mobile_phone_number | tstr |
-| expiry_date | expiry_date | tdate or full-date |
-| issuing_authority | issuing_authority | tstr |
-| issuing_country | issuing_country | tstr |
-| document_number | document_number | tstr |
-| issuing_jurisdiction | issuing_jurisdiction | tstr |
+| family_name | family_name | ``tstr`` |
+| given_name | given_name | ``tstr`` |
+| birth_date | birth_date | ``full-date``, see [Section 3.1.4](#314-attribute-birth_date). |
+| birth_place | place_of_birth | ``place_of_birth``, see [Section 3.1.5](#315-attribute-place_of_birth). |
+| nationality | nationality | ``nationalities``, see [Section 3.1.2](#312-attribute-nationality). |
+| resident_address | resident_address | ``tstr`` |
+| resident_country | resident_country | ``tstr`` |
+| resident_state | resident_state | ``tstr`` |
+| resident_city | resident_city | ``tstr`` |
+| resident_postal_code | resident_postal_code | ``tstr`` |
+| resident_street | resident_street | ``tstr`` |
+| resident_house_number | resident_house_number | ``tstr`` |
+| personal_administrative_number | personal_administrative_number | ``tstr`` |
+| portrait | portrait | ``bstr``; see additional information in [Section 2.3](#23-optional-attributes-specified-in-cir-20242977)|
+| family_name_birth | family_name_birth | ``tstr`` |
+| given_name_birth | given_name_birth | ``tstr`` |
+| sex | sex | ``uint``; see additional information in [Section 2.3](#23-optional-attributes-specified-in-cir-20242977)  |
+| email_address | email_address | ``tstr`` |
+| mobile_phone_number | mobile_phone_number | ``tstr`` |
+| expiry_date | expiry_date | ``tdate`` or ``full-date`` |
+| issuing_authority | issuing_authority | ``tstr`` |
+| issuing_country | issuing_country | ``tstr`` |
+| document_number | document_number | ``tstr`` |
+| issuing_jurisdiction | issuing_jurisdiction | ``tstr`` |
 | location_status | - | See [Section 3.1.3](#313-attribute-location_status). |
-| issuance_date | issuance_date | tdate or full-date |
-| trust_anchor | trust_anchor | tstr |
+| issuance_date | issuance_date | ``tdate`` or ``full-date`` |
+| trust_anchor | trust_anchor | ``tstr`` |
 
 #### 3.1.2 Attribute nationality
 
 The attribute nationality takes as its value an array of Alpha-2 country codes
 as specified in ISO 3166-1. Using CDDL notation as specified in RFC 8610, the
-encoding of this data element is:
+encoding of this attribute is:
 
-``` text
-nationalities = [
-  \+ CountryCode
-]
+``` cddl
+nationalities = [+ CountryCode]
 
 CountryCode = tstr ; Alpha-2 country code specified in ISO 3166-1
 ```
@@ -252,9 +249,9 @@ scope of this document.
 #### 3.1.5 Attribute place_of_birth
 
 The attribute place_of_birth SHALL contain at least one of the following key-value pairs: country, region, or locality.
-Using CDDL notation as specified in RFC 8610, the encoding of this data element is:
+Using CDDL notation as specified in RFC 8610, the encoding of this attribute is:
   
-``` text
+``` cddl
 place_of_birth =
 {
   ? "country": tstr  ; a single alpha-2 country code as specified in ISO 3166-1
@@ -319,8 +316,6 @@ The following Private Names specific to the attestation type defined in this doc
 | issuing_jurisdiction | issuing_jurisdiction | string | |
 | location_status | - | See [Section 4.1.2](#412-attribute-location_status) | |
 | trust_anchor | trust_anchor | string | |
-
-
 
 #### 4.1.2 Attribute location_status
 
