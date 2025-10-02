@@ -7,7 +7,7 @@ subtitle: "ARF Annex 3.01 - PID Rulebook"
 
 | Version | Date | Description |
 |---------|------------|------------|
-| 1.1 | 4 Sept 2025 | age verification attributes removed, following CIR 2024/2977 |
+| 1.2| 2 Oct 2025 | Fixed CDDL error in [Section 3.1.2](#312-attribute-nationality); throughout document, enclosed data types in backticks for more clarity; in [Section 3.1.1](#311-overview), added a few references for clarity |
 
 ## 1 Introduction
 
@@ -210,8 +210,7 @@ requirements apply:
 
 #### 3.1.2 Attribute nationality
 
-The attribute nationality takes as its value an array of Alpha-2 country codes
-as specified in ISO 3166-1. Using CDDL notation as specified in RFC 8610, the
+The attribute nationality is encoded as a type ``nationalities``, i.e., an array of Alpha-2 country codes as specified in ISO 3166-1. Using CDDL notation as specified in RFC 8610, the
 encoding of this attribute is:
 
 ``` cddl
@@ -248,7 +247,7 @@ scope of this document.
 
 #### 3.1.5 Attribute place_of_birth
 
-The attribute place_of_birth SHALL contain at least one of the following key-value pairs: country, region, or locality.
+The attribute place_of_birth is encoded as a type ``place_of_birth``.
 Using CDDL notation as specified in RFC 8610, the encoding of this attribute is:
   
 ``` cddl
@@ -259,6 +258,7 @@ place_of_birth =
   ? "locality": tstr ; the name of a municipality, city, town, or village
 }
 ```
+place_of_birth SHALL contain at least one of the following key-value pairs: ``"country"``, ``"region"``, or ``"locality"``.
 
 ## 4 SD-JWT VC-based encoding of PID
 
