@@ -7,7 +7,7 @@ subtitle: "ARF Annex 3.01 - PID Rulebook"
 
 | Version | Date | Description |
 |---------|------------|------------|
-| 1.2| 2 Oct 2025 | Fixed CDDL error in [Section 3.1.2](#312-attribute-nationality); throughout document, enclosed data types in backticks for more clarity; in [Section 3.1.1](#311-overview), added a few references for clarity |
+| 1.2| 2 Oct 2025 | Fixed CDDL error in [Section 3.1.2](#312-attribute-nationality); throughout document, enclosed data types in backticks for more clarity; in [Section 3.1.1](#311-overview), added a few references for clarity; minor textual changes |
 
 ## 1 Introduction
 
