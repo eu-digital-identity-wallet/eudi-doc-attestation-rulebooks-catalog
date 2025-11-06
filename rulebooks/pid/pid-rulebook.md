@@ -319,8 +319,7 @@ The following Private Names specific to the attestation type defined in this doc
 
 #### 4.1.2 Attribute location_status
 
-For SD-JWT VC-compliant PIDs, the PID issuer will add validity status
-information, if needed, as specified in [SD-JWT VC]. This PID Rulebook does not
+For SD-JWT VC-compliant PIDs, the PID issuer will add validity status information, if needed, in the status claim specified in [SD-JWT VC] section 3.2.2.2; see also [HAIP] section 6.1. This PID Rulebook does not
 specify a separate attribute for including the location of validity status
 information.
 
