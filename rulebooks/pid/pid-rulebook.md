@@ -7,7 +7,9 @@ subtitle: "ARF Annex 3.01 - PID Rulebook"
 
 | Version | Date | Description |
 |---------|------------|------------|
-| 1.2| 2 Oct 2025 | Fixed CDDL error in [Section 3.1.2](#312-attribute-nationality); throughout document, enclosed data types in backticks for more clarity; in [Section 3.1.1](#311-overview), added a few references for clarity; minor textual changes |
+| 1.1 | 4 Sep 2025 | Taking PID Rulebook out of ARF 2.5.0 and into separate GitHub repository. Age verification attributes removed, following CIR 2024/2977. |
+| 1.2 | 2 Oct 2025 | Fixed CDDL error in [Section 3.1.2](#312-attribute-nationality); throughout document, enclosed data types in backticks for more clarity; in [Section 3.1.1](#311-overview), added a few references for clarity; minor textual changes |
+| 1.3 | 6 Nov 2025 | Adding references to sections in [SD-JWT VC] and [HAIP] in section 4.1.2. Completing changelog (from start of this repo). |
 
 ## 1 Introduction
 
