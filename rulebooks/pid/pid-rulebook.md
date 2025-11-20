@@ -112,12 +112,12 @@ Note that the data type for each attribute is not specified in this chapter, but
 | resident_postal_code | The postal code of the place where the user to whom the person identification data relates currently resides. | 2312 JD |
 | resident_street | The name of the street where the user to whom the person identification data relates currently resides. | Rietveld |
 | resident_house_number | The house number where the user to whom the person identification data relates currently resides, including any affix or suffix. |  1 |
-| personal_administrative_number | A value assigned to the natural person that is unique among all personal administrative numbers issued by the provider of person identification data. Where Member States opt to include this attribute, they shall describe in their electronic identification schemes under which the person identification data is issued, the policy that they apply to the values of this attribute, including, where applicable, specific conditions for the processing of this value. | 123456782 
+| personal_administrative_number | A value assigned to the natural person that is unique among all personal administrative numbers issued by the provider of person identification data. Where Member States opt to include this attribute, they shall describe in their electronic identification schemes under which the person identification data is issued, the policy that they apply to the values of this attribute, including, where applicable, specific conditions for the processing of this value. | 123456782 |
 | portrait | Facial image of the wallet user compliant with ISO 19794-5 or ISO 39794 specifications. **Further clarification added in this PID Rulebook:** The detailed format of the portrait is specified in requirement PID_03 in [Annex 2, Topic 3](../annex-2/annex-2-high-level-requirements.md#a233-topic-3---pid-rulebook). | - |
 | family_name_birth | Last name(s) or surname(s) of the User to whom the person identification data relates at the time of birth. | Poepjes |
-| given_name_birth | First name(s), including middle name(s), of the User to whom the person identification data relates at the time of birth. | Johanna Wijnanda |
+| given_name_birth | First name(s), including middle name(s), of the User to whom the person identification data relates at the time of birth. | Björn |
 | sex | Values shall be one of the following: 0 = not known; 1 = male; 2 = female; 3 = other; 4 = inter; 5 = diverse; 6 = open; 9 = not applicable. For values 0, 1, 2 and 9, ISO/IEC 5218 applies. | 1 |
-| email_address | Electronic mail address of the user to whom the person identification data relates, in conformance with [RFC 5322]. | wijnandthart@gmail.com |
+| email_address | Electronic mail address of the user to whom the person identification data relates, in conformance with [RFC 5322]. | <wijnandthart@example.com> |
 | mobile_phone_number | Mobile telephone number of the User to whom the person identification data relates, starting with the '+' symbol as the international code prefix and the country code, followed by numbers only. | +31123456789 |
 
 ### 2.4 Mandatory metadata specified in CIR 2024/2977
@@ -134,14 +134,14 @@ Note that the data type for each attribute is not specified in this chapter, but
 |------------------------|--------------|------------------|
 | document_number | A number for the person identification data, assigned by the provider of person identification data. | A01234567 |
 | issuing_jurisdiction | Country subdivision code of the jurisdiction that issued the person identification data, as specified in ISO 3166-2:2020, Clause 8. The first part of the code shall be the same as the value for the issuing country. | NL |
-| location_status | The location of validity status information on the person identification data where the providers of person identification data revoke person identification data. | https://example.com/statuslists/pid/ |
+| location_status | The location of validity status information on the person identification data where the providers of person identification data revoke person identification data. | <https://example.com/statuslists/pid/> |
 
 ### 2.6 Additional optional attributes specified in this Rulebook
 
 | **Data Identifier** | **Definition** |**Example value** |
 |------------------------|--------------|------------------|
 | issuance_date | Date (and if possible time) when the person identification data was issued and/or the administrative validity period of the person identification data began. See also the clarification for expiry_date in [Section 2.4](#24-mandatory-metadata-specified-in-cir-20242977). | 19-12-2025 |
-| trust_anchor | This attribute indicates at least the URL at which a machine-readable version of the trust anchor to be used for verifying the PID can be found or looked up. *Note: This attribute corresponds to the location meant in Annex V point h) or Annex VII point h) of the [European Digital Identity Regulation], which is mandatory for QEAAs. This PID Rulebook adds this as an optional attribute for PIDs as well, so PID Providers are able to ensure that PIDs can be validated by Relying Parties in the same manner as QEAAs.* | https://example.com/trustanchors/pid/ |
+| trust_anchor | This attribute indicates at least the URL at which a machine-readable version of the trust anchor to be used for verifying the PID can be found or looked up. *Note: This attribute corresponds to the location meant in Annex V point h) or Annex VII point h) of the [European Digital Identity Regulation], which is mandatory for QEAAs. This PID Rulebook adds this as an optional attribute for PIDs as well, so PID Providers are able to ensure that PIDs can be validated by Relying Parties in the same manner as QEAAs.* | <https://example.com/trustanchors/pid/> |
 | attestation_legal_category | This attribute indicates that a PID has indeed been issued as a PID. *Note: According to Annex V point a) and Annex VII point a) of the [European Digital Identity Regulation] an indication, at least in a form suitable for automated processing, that the attestation has been issued as a QEAA or Pub-EAA SHALL be defined. This PID Rulebook adds this as an optional attribute for PIDs as well, so PID Providers are able to ensure that PIDs can be validated by Relying Parties in the same manner as QEAAs.* | PID |
 
 ## 3 ISO/IEC 18013-5-compliant encoding of PID
@@ -218,7 +218,6 @@ Note that the presence of each attribute (mandatory or optional) is already spec
 | issuance_date | issuance_date | ``tdate`` or ``full-date`` |
 | trust_anchor | trust_anchor | ``tstr`` |
 | attestation_legal_category | attestation_legal_category | ``tstr`` |
-
 
 #### 3.1.2 Attribute nationality
 
@@ -406,7 +405,19 @@ references to the issuer, validity status information, and more.
 
 ## 5 PID usage
 
+Users request issuance of PIDs from PID Providers, manage them in their Wallet Unit, and present attributes from a PID to Relying Parties on request.
+
+PID Providers issue PIDs to Wallet Units on request of Users, and revoke them if necessary.
+
+Relying Parties request attributes from a User's PID, and verify their authenticity and validity (including revocation status, if any).
+
+Users, PID Providers, and Relying Parties do this in compliance with all applicable requirements in the [European Digital Identity Regulation] and the corresponding Implementing Acts, as described in the ARF.
+
 ## 6 Trust anchors
+
+PID trust anchors are public keys and associated information, needed by Relying Parties to verify the authenticity of any PID attributes they obtain from Wallet Units.
+
+Member States notify each PID Provider to the Commission as specified in the [European Digital Identity Regulation] and the applicable Implementing Acts. Notification includes the trust anchors of the PID Provider. The Commission will ensure that the trust anchors of notified PID Providers are published in a publicly available Trusted List. Relying Parties can retrieve the trust anchors of all PID Providers from this Trusted List.
 
 ## 7 Revocation
 
