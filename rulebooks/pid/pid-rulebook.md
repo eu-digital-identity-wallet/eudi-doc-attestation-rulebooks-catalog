@@ -328,6 +328,7 @@ The following Private Names specific to the attestation type defined in this doc
 | issuing_jurisdiction | issuing_jurisdiction | string | |
 | location_status | - | See [Section 4.1.2](#412-attribute-location_status) | |
 | trust_anchor | trust_anchor | string | |
+| attestation_legal_category | attestation_legal_category | string | |
 
 #### 4.1.2 Attribute location_status
 
