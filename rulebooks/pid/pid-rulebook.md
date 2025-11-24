@@ -417,16 +417,18 @@ Users, PID Providers, and Relying Parties do this in compliance with all applica
 
 PID trust anchors are public keys and associated information, needed by Relying Parties to verify the authenticity of any PID attributes they obtain from Wallet Units.
 
-Member States notify each PID Provider to the Commission as specified in the [European Digital Identity Regulation] and the applicable Implementing Acts. Notification includes the trust anchors of the PID Provider. The Commission will ensure that the trust anchors of notified PID Providers are published in a publicly available Trusted List. Relying Parties can retrieve the trust anchors of all PID Providers from this Trusted List.
+Member States notify each PID Provider to the Commission as specified in the [European Digital Identity Regulation] and the applicable Implementing Acts, including [CIR 2024/2980](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=OJ:L_202402980). Notification includes the trust anchors of the PID Provider. The Commission will ensure that the trust anchors of notified PID Providers are published in a publicly available Trusted List. Relying Parties can retrieve the trust anchors of all PID Providers from this Trusted List.
 
 ## 7 Revocation
+
+PID Providers revoke PIDs, if necessary, in accordance with [CIR 2024/2977](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=OJ:L_202402977) and with [Topic 7](https://github.com/eu-digital-identity-wallet/eudi-doc-architecture-and-reference-framework/blob/main/docs/annexes/annex-2/annex-2.02-high-level-requirements-by-topic.md#a235-topic-7---attestation-revocation-and-revocation-checking) in Annex 2 of the Architecture Reference Framework.
 
 ## 8 Compliance
 
 This PID Rulebook complies with all applicable requirements in [Topic 12
 (Attestation Rulebooks)](https://github.com/eu-digital-identity-wallet/eudi-doc-architecture-and-reference-framework/blob/main/docs/annexes/annex-2/annex-2.02-high-level-requirements-by-topic.md#a239-topic-12---attestation-rulebooks) in Annex 2 of the Architecture Reference Framework. It also complies with the [template for Attestation Rulebooks](https://github.com/eu-digital-identity-wallet/eudi-doc-attestation-rulebooks-catalog/blob/main/template/attestation-rulebook-template.md).
 
-The attributes specified in this Rulebook comply with [CIR 2024/2977].
+The attributes specified in this Rulebook comply with [CIR 2024/2977](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=OJ:L_202402977).
 
 Further requirements in this Rulebook comply with or reference the applicable requirements in the ARF and the relevant Implementing Acts.
 
