@@ -1,5 +1,7 @@
-* Template version: 1.2, 07-10-2025
-* Changes: Fixing markdown issues; adding requirement to Chapter 4 regarding the need to specify whether an attestation is device-bound or non device-bound.
+| Version | Date | Description |
+|---------|------------|------------|
+| 1.2 | 07-10-2025 | Fixing markdown issues; adding requirement to Chapter 4 regarding the need to specify whether an attestation is device-bound or non device-bound. |
+| 1.3 | 25-11-2025 | 
 
 # Attestation Rulebook for attestations of type  *ADD THE ATTESTATION TYPE HERE*
 
