@@ -1,5 +1,9 @@
-* Template version: 1.2, 07-10-2025
-* Changes: Fixing markdown issues; adding requirement to Chapter 4 regarding the need to specify whether an attestation is device-bound or non device-bound.
+| Version | Date | Description |
+|---------|------------|------------|
+| 1.0 | 24-06-2025 | First version |
+| 1.1 | 20-08-2025 | Allowing private names specific to the attestation type for JSON claims; adding requirements to specify whether a claim is selectively disclosable. |
+| 1.2 | 07-10-2025 | Fixing markdown issues; adding requirement to Chapter 4 regarding the need to specify whether an attestation is device-bound or non device-bound. |
+| 1.3 | 02-12-2025 | Add complete change history; include the optional ``cryptographically_bound_to`` attribute specified in ARB_28; removed recommendation to define a JSON schema for SD-JWT VC-based attestations. |
 
 # Attestation Rulebook for attestations of type  *ADD THE ATTESTATION TYPE HERE*
 
@@ -46,9 +50,9 @@ encoding-independent manner.
 attributes and metadata are encoded in case the attestation complies with [ISO/IEC
 18013-5] and/or [SD-JWT VC] and/or [W3C VCDM v2.0]. Each encoding SHALL be specified in a separate section, or even in a separate chapter.
 * Chapter 4, which specifies attestation usage.
-* Chapter 5, which defines trust anchors
-* Chapter 6, which defines revocation mechanisms
-* Chapter 7, which provides compliance information
+* Chapter 5, which defines how trust anchors for attestation verification can be obtained.
+* Chapter 6, which defines attestation revocation mechanisms.
+* Chapter 7, which provides compliance information.
 
 ### 1.3 Key words
 
@@ -73,18 +77,20 @@ This document uses the terminology specified in Annex 1 of the ARF.
 
 ## 2 Attestation attributes and metadata
 
-*This section is used for defining all attributes that an
+### Chapter overview and requirements
+
+*This chapter is used for defining all attributes that an
 attestation of the defined type may contain. In this section
 the attributes SHALL be defined in an encoding-independent manner (see ARB_06 in [Topic 12]).
 Each attribute can be mandatory, optional, or conditional
-and it SHALL be specified in the corresponding section (see ARB_09 in [Topic 12]).*
+and this SHALL be specified in the corresponding section (see ARB_09 in [Topic 12]).*
 
 *When attributes are defined, referring to attributes that
 already exist in a catalogue of attestation attributes
 SHOULD be considered (see ARB_07 in [Topic 12]).*
 
 *[Topic 12] of Annex 2 of the ARF defines the following High-Level Requirements with
-respect to the Attestation Rulebooks*
+respect to the Attestation Rulebooks:*
 
 **Requirements for QEAA**
 
@@ -99,7 +105,7 @@ of the [European Digital Identity Regulation] SHALL be included (see ARB_18 in [
 * One or more attributes or metadata representing the location meant in Annex V point h)
 of the [European Digital Identity Regulation] SHALL be included. This location SHALL
 indicate at least the URL at which a machine-readable version of the trust anchor to be
-used for verifying the QEAA can be found or looked up (see ARB_20 in [Topic 12])
+used for verifying the QEAA can be found or looked up (see ARB_20 in [Topic 12]).
 
 **Requirements for PuB-EAA**
 
@@ -134,7 +140,7 @@ on the nature of the mechanism used for distributing trust anchors, detailed in 
 
 ### 2.1 Introduction
 
-*Briefly introduce the overall design and purpose of the specific attestation type
+*In this section, briefly introduce the overall design and purpose of the specific attestation type
 defined by this Rulebook, including key decisions regarding its attributes and
 legal categorization.*
 
@@ -142,10 +148,11 @@ legal categorization.*
 an indication, at least in a form suitable for automated processing, that the attestation
 has been issued as a QEAA or Pub-EAA SHALL be defined. Similarly, according to ARB_12
 of [Topic 12] of Annex 2 of the ARF a similar indication SHOULD be defined for non-qualified EAA.
+
 This document defines the attribute "attestation_legal_category" which SHALL have
 the value "QEAA" or "PuB-EAA" or "non-qualified-EAA".*
 
-*In the following subsections define in an encoding independent manner all
+*In the following subsections 2.1 - 2.7 define in an encoding independent manner all
 mandatory, optional, and conditional attributes and metadata. In each subsection
 provide a table of the following form:*
 
@@ -316,10 +323,6 @@ it SHOULD contain the Claim Selective Disclosure Metadata (defined in Section 9.
 for each of the claims, in order to specify if that claim is selectively disclosable (see ARB_31
 in [Topic 12]).*
 
-*Rulebook authors SHOULD consider defining a JSON Schema for the attestation type specified
-in the Rulebook, as defined in Section 6.5 of [SD-JWT VC], and include or reference that
-Schema in the Type Metadata Document meant in ARB_31 (see ARB_32 in [Topic 12]).*
-
 *IANA-registered claims should be presented in table that
 includes their data identifier, attribute identifier,
 encoding format, and reference or note. For example,*
@@ -390,22 +393,24 @@ requirements for how this attestation must be presented (e.g., online, offline, 
 
 *Specify whether an attestation of this type must be device-bound or non device-bound, see ARB_34 in [Topic 12]*
 
+*If an attestation of this type is device-bound, include the optional attribute  ``cryptographically_bound_to`` (as defined in ARB_28) in [Section 2.5](#26-optional-metadata). If present in an Attestation Rulebook, the identifier for this attribute SHALL be "`cryptographically_bound_to" for both ISO/IEC 18013-5 and SD-JWT VC-compliant attestations, and its contents SHALL be tstr or string (as applicable) containing an attestation type or vct (see ARB_05).*
+
 *Finally, in this section information about potential transactional data
-SHALL be defined (see [Topic 20] of Annex 2 of the ARF).*
+SHALL be defined; see [Topic 20] of Annex 2 of the ARF.*
 
 ## 5 Trust anchors
 
 *Mechanisms for the provision of a trust anchor that SHALL
 be used for the verification of an attestation SHALL be defined in this section.*
 
-*It is noted that the ARF specifies the following for QEAAs and Pub-EAAs*
+*It is noted that the ARF specifies the following for QEAAs and Pub-EAAs:*
 
 > To do this for [...] QEAAs the Relying Party Instance uses a trust anchor of
 the Provider obtained from a Trusted List. Note that the PID Provider or QEAA
 Provider may use an intermediate signing certificate to sign the PID or
 attestation, and use the trust anchor to sign the signing certificate, instead
 of signing the PID or attestation directly with the trust anchor.
-
+>
 > For PuB-EAAs, the Relying Party Instance verifies a PuB-EAA by first
 verifying the signature of the PuB-EAA Provider over the PuB-EAA, using the
 PuB-EAA Provider certificate issued by a QTSP. Subsequently, the Relying Party
@@ -418,10 +423,10 @@ extra certificates, compared to the verification of a PID or QEAA.
 *For non-qualified EAA in this section it SHOULD  be defined (see ARB_26 in [Topic 12])
 how the attributes or metadata representing the location at which a machine-readable
 version of the trust anchor to be used for verifying the attestation can be found,
-specified in section 2, are used. This includes, a detailed description about how
-a Relying Party can obtain the trust anchor, as well as a detailed description about
+specified in section 2, are used. This includes a detailed description about how
+a Relying Party can obtain the trust anchors, as well as a detailed description about
 how this trust anchor can be used for verifying that the provider is authorized
-to issue the attestation. Additionally, for non-qualified EAA Provider this section
+to issue the attestation. Additionally, for non-qualified EAA Providers this section
 MAY include a description of mechanisms that can be used by a Wallet Unit for
 verifying that the provider is authorized to issue this type of attestation (see
 ISSU_34 in [Topic 10])*

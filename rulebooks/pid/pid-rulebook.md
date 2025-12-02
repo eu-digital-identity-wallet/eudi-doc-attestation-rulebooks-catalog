@@ -10,10 +10,11 @@ subtitle: "ARF Annex 3.01 - PID Rulebook"
 | 1.1 | 4 Sep 2025 | Taking PID Rulebook out of ARF 2.5.0 and into separate GitHub repository. Age verification attributes removed, following CIR 2024/2977. |
 | 1.2 | 2 Oct 2025 | Fixed CDDL error in [Section 3.1.2](#312-attribute-nationality); throughout document, enclosed data types in backticks for more clarity; in [Section 3.1.1](#311-overview), added a few references for clarity; minor textual changes |
 | 1.3 | 6 Nov 2025 | Adding references to sections in [SD-JWT VC] and [HAIP] in section 4.1.2. Completing changelog (from start of this repo). |
+| 1.4 | 20 Nov 2025 | Adding a reference to [Topic 3](https://github.com/eu-digital-identity-wallet/eudi-doc-attestation-rulebooks-catalog/blob/main/template/attestation-rulebook-template.md) in Annex 2 of the ARF in section 1.1. Making the PID Rulebook fully consistent with the Rulebook template. |
 
 ## 1 Introduction
 
-### 1.1 Document scope
+### 1.1 Document scope and purpose
 
 This document is the natural-person Person Identification Data (PID) Rulebook
 and is part of the Architecture Reference Framework (ARF). It specifies
@@ -27,10 +28,9 @@ not included in the CIR.
 This document also specifies how a PID and all attributes in it are encoded if
 the PID complies with [ISO/IEC 18013-5] and if it complies with [SD-JWT VC].
 
-Person identification data for the legal person is out of scope of this document.
+This PID Rulebook should be read in conjunction with the high-level requirements for PIDs in [Topic 3](https://github.com/eu-digital-identity-wallet/eudi-doc-attestation-rulebooks-catalog/blob/main/template/attestation-rulebook-template.md) in Annex 2 of the Architecture Reference Framework. In particular, the values to be used for the namespace and document type for [ISO/IEC 18013-5]-compliant PIDs and for the vct claim in [SD-JWT VC]-compliant PIDs are defined in Topic 3.
 
-This PID Rulebook complies with all applicable requirements in Topic 12
-(Attestation Rulebooks) in Annex 2 of the Architecture Reference Framework.
+Person identification data for the legal person is out of scope of this document.
 
 ### 1.2 Document structure
 
@@ -46,6 +46,10 @@ attributes and metadata are encoded in case the PID complies with [ISO/IEC
 18013-5].
 - [Chapter 4](#4-sd-jwt-vc-based-encoding-of-pid) specifies how the PID
 attributes and metadata are encoded in case the PID complies with [SD-JWT VC].
+= [Chapter 5](#5-pid-usage) specifies how PIDs are issued and used.
+- [Chapter 6](#6-trust-anchors) discusses mechanisms for the provision of trust anchors that shall be used for the verification of PIDs.
+- [Chapter 7](#7-revocation) discusses how PIDs can be revoked, and how Relying Parties can perform revocation checking.
+- [Chapter 8](#8-compliance) states how this PID Rulebook complies with the general EUDI framework, the ARF, and relevant Regulations.
 
 ### 1.3 Key words
 
@@ -83,60 +87,62 @@ encoding used. Consequently,
 attribute identifiers used for PIDs complying with [ISO/IEC 18013-5]. [Chapter 3](#3-isoiec-18013-5-compliant-encoding-of-pid) specifies the attribute
 identifiers to be used for PIDs in [ISO/IEC 18013-5] format
 - the data identifiers in these tables are not necessarily the same as the claim
-names used for PIDs complying with [SD-JWT VC]. [Chapter 4](#4-sd-jwt-vc-based-encoding-of-pid) specifies the claim names to be
-used for such PIDs.
+names used for PIDs complying with [SD-JWT VC]. [Chapter 4](#4-sd-jwt-vc-based-encoding-of-pid) specifies the claim names to be used for such PIDs.
+
+Note that the data type for each attribute is not specified in this chapter, but in [Chapter 3](#3-isoiec-18013-5-compliant-encoding-of-pid) and [Chapter 4](#4-sd-jwt-vc-based-encoding-of-pid).
 
 ### 2.2 Mandatory attributes specified in CIR 2024/2977
 
-| **Data Identifier** | **Definition** |
-|------------------------|--------------|
-| family_name | Current last name(s) or surname(s) of the user to whom the person identification data relates. |
-| given_name | Current first name(s), including middle name(s) where applicable, of the user to whom the person identification data relates. |
-| birth_date | Day, month, and year on which the user to whom the person identification data relates was born. |
-| birth_place | The country as an alpha-2 country code as specified in ISO 3166-1, or the state, province, district, or local area or the municipality, city, town, or village where the user to whom the person identification data relates was born. |
-| nationality | One or more alpha-2 country codes as specified in ISO 3166-1, representing the nationality of the user to whom the person identification data relates. |
+| **Data Identifier** | **Definition** | **Example value** |
+|------------------------|--------------|------------------|
+| family_name | Current last name(s) or surname(s) of the user to whom the person identification data relates. | 't Hart |
+| given_name | Current first name(s), including middle name(s) where applicable, of the user to whom the person identification data relates. | Jan Wijnand |
+| birth_date | Day, month, and year on which the user to whom the person identification data relates was born. | 12-02-1978 |
+| birth_place | The country as an alpha-2 country code as specified in ISO 3166-1, or the state, province, district, or local area or the municipality, city, town, or village where the user to whom the person identification data relates was born. | Amsterdam |
+| nationality | One or more alpha-2 country codes as specified in ISO 3166-1, representing the nationality of the user to whom the person identification data relates. | NL|
 
 ### 2.3 Optional attributes specified in CIR 2024/2977
 
-| **Data Identifier** | **Definition** |
-|------------------------|--------------|
-| resident_address | The full address of the place where the user to whom the person identification data relates currently resides or can be contacted (street name, house number, city etc.). |
-| resident_country | The country where the user to whom the person identification data relates currently resides, as an alpha-2 country code as specified in ISO 3166-1. |
-| resident_state | The state, province, district, or local area where the user to whom the person identification data relates currently resides. |
-| resident_city | The municipality, city, town, or village where the user to whom the person identification data relates currently resides. |
-| resident_postal_code | The postal code of the place where the user to whom the person identification data relates currently resides. |
-| resident_street | The name of the street where the user to whom the person identification data relates currently resides. |
-| resident_house_number | The house number where the user to whom the person identification data relates currently resides, including any affix or suffix. |
-| personal_administrative_number | A value assigned to the natural person that is unique among all personal administrative numbers issued by the provider of person identification data. Where Member States opt to include this attribute, they shall describe in their electronic identification schemes under which the person identification data is issued, the policy that they apply to the values of this attribute, including, where applicable, specific conditions for the processing of this value. |
-| portrait | Facial image of the wallet user compliant with ISO 19794-5 or ISO 39794 specifications. **Further clarification added in this PID Rulebook:** The detailed format of the portrait is specified in requirement PID_03 in [Annex 2, Topic 3](../annex-2/annex-2-high-level-requirements.md#a233-topic-3---pid-rulebook). |
-| family_name_birth | Last name(s) or surname(s) of the User to whom the person identification data relates at the time of birth. |
-| given_name_birth | First name(s), including middle name(s), of the User to whom the person identification data relates at the time of birth. |
-| sex | Values shall be one of the following: 0 = not known; 1 = male; 2 = female; 3 = other; 4 = inter; 5 = diverse; 6 = open; 9 = not applicable. For values 0, 1, 2 and 9, ISO/IEC 5218 applies. |
-| email_address | Electronic mail address of the user to whom the person identification data relates, in conformance with [RFC 5322]. |
-| mobile_phone_number | Mobile telephone number of the User to whom the person identification data relates, starting with the '+' symbol as the international code prefix and the country code, followed by numbers only. |
+| **Data Identifier** | **Definition** |**Example value** |
+|------------------------|--------------|------------------|
+| resident_address | The full address of the place where the user to whom the person identification data relates currently resides or can be contacted (street name, house number, city etc.). | Rietveld 1, 2312 JD, Leiden |
+| resident_country | The country where the user to whom the person identification data relates currently resides, as an alpha-2 country code as specified in ISO 3166-1. | NL |
+| resident_state | The state, province, district, or local area where the user to whom the person identification data relates currently resides. | Zuid-Holland |
+| resident_city | The municipality, city, town, or village where the user to whom the person identification data relates currently resides. | Leiden |
+| resident_postal_code | The postal code of the place where the user to whom the person identification data relates currently resides. | 2312 JD |
+| resident_street | The name of the street where the user to whom the person identification data relates currently resides. | Rietveld |
+| resident_house_number | The house number where the user to whom the person identification data relates currently resides, including any affix or suffix. |  1 |
+| personal_administrative_number | A value assigned to the natural person that is unique among all personal administrative numbers issued by the provider of person identification data. Where Member States opt to include this attribute, they shall describe in their electronic identification schemes under which the person identification data is issued, the policy that they apply to the values of this attribute, including, where applicable, specific conditions for the processing of this value. | 123456782 |
+| portrait | Facial image of the wallet user compliant with ISO 19794-5 or ISO 39794 specifications. **Further clarification added in this PID Rulebook:** The detailed format of the portrait is specified in requirement PID_03 in [Annex 2, Topic 3](../annex-2/annex-2-high-level-requirements.md#a233-topic-3---pid-rulebook). | - |
+| family_name_birth | Last name(s) or surname(s) of the User to whom the person identification data relates at the time of birth. | Poepjes |
+| given_name_birth | First name(s), including middle name(s), of the User to whom the person identification data relates at the time of birth. | Björn |
+| sex | Values shall be one of the following: 0 = not known; 1 = male; 2 = female; 3 = other; 4 = inter; 5 = diverse; 6 = open; 9 = not applicable. For values 0, 1, 2 and 9, ISO/IEC 5218 applies. | 1 |
+| email_address | Electronic mail address of the user to whom the person identification data relates, in conformance with [RFC 5322]. | <wijnandthart@example.com> |
+| mobile_phone_number | Mobile telephone number of the User to whom the person identification data relates, starting with the '+' symbol as the international code prefix and the country code, followed by numbers only. | +31123456789 |
 
 ### 2.4 Mandatory metadata specified in CIR 2024/2977
 
-| **Data Identifier** | **Definition** |
-|------------------------|--------------|
-| expiry_date | Date (and if possible time) when the person identification data will expire. **Further clarification added in this PID Rulebook:** This attribute, as well as the optional issuance_date attribute specified in [Section 2.6](#26-additional-optional-attributes-specified-in-this-rulebook), pertains to the administrative validity period of the PID. It is up to the PID Provider to decide whether a PID has an administrative validity period. However, if present, it in general is different from the technical validity period of a PID. The technical validity period is a mandatory element of all PIDs (and also attestations) in the EUDI Wallet ecosystem. It typically is short, a few days or weeks at most, if not shorter, to mitigate challenges regarding tracking of Users by malicious Relying Parties based on the repeated presentation of the same PID. On the other hand, the administrative validity period is typically at least a few years long. During the administrative validity period of a PID, the PID Provider will therefore provide multiple successive PIDs to a User, typically without any actions being expected from the User. However, when the administrative validity period of a PID ends, typically the User has to apply for an entirely new PID.|
-| issuing_authority | Name of the administrative authority that issued the person identification data, or the ISO 3166 alpha-2 country code of the respective Member State if there is no separate authority entitled to issue person identification data. |
-| issuing_country | Alpha-2 country code, as specified in ISO 3166-1, of the country or territory of the provider of the person identification data. |
+| **Data Identifier** | **Definition** |**Example value** |
+|------------------------|--------------|------------------|
+| expiry_date | Date (and if possible time) when the person identification data will expire. **Further clarification added in this PID Rulebook:** This attribute, as well as the optional issuance_date attribute specified in [Section 2.6](#26-additional-optional-attributes-specified-in-this-rulebook), pertains to the administrative validity period of the PID. It is up to the PID Provider to decide whether a PID has an administrative validity period. However, if present, it in general is different from the technical validity period of a PID. The technical validity period is a mandatory element of all PIDs (and also attestations) in the EUDI Wallet ecosystem. It typically is short, a few days or weeks at most, if not shorter, to mitigate challenges regarding tracking of Users by malicious Relying Parties based on the repeated presentation of the same PID. On the other hand, the administrative validity period is typically at least a few years long. During the administrative validity period of a PID, the PID Provider will therefore provide multiple successive PIDs to a User, typically without any actions being expected from the User. However, when the administrative validity period of a PID ends, typically the User has to apply for an entirely new PID.| 19-12-2025 |
+| issuing_authority | Name of the administrative authority that issued the person identification data, or the ISO 3166 alpha-2 country code of the respective Member State if there is no separate authority entitled to issue person identification data. | Rijksdienst voor Identiteitsgegevens |
+| issuing_country | Alpha-2 country code, as specified in ISO 3166-1, of the country or territory of the provider of the person identification data. | NL |
 
 ### 2.5 Optional metadata specified in CIR 2024/2977
 
-| **Data Identifier** | **Definition** |
-|------------------------|--------------|
-| document_number | A number for the person identification data, assigned by the provider of person identification data. |
-| issuing_jurisdiction | Country subdivision code of the jurisdiction that issued the person identification data, as specified in ISO 3166-2:2020, Clause 8. The first part of the code shall be the same as the value for the issuing country. |
-| location_status | The location of validity status information on the person identification data where the providers of person identification data revoke person identification data. |
+| **Data Identifier** | **Definition** |**Example value** |
+|------------------------|--------------|------------------|
+| document_number | A number for the person identification data, assigned by the provider of person identification data. | A01234567 |
+| issuing_jurisdiction | Country subdivision code of the jurisdiction that issued the person identification data, as specified in ISO 3166-2:2020, Clause 8. The first part of the code shall be the same as the value for the issuing country. | NL |
+| location_status | The location of validity status information on the person identification data where the providers of person identification data revoke person identification data. | <https://example.com/statuslists/pid/> |
 
 ### 2.6 Additional optional attributes specified in this Rulebook
 
-| **Data Identifier** | **Definition** |
-|------------------------|--------------|
-| issuance_date | Date (and if possible time) when the person identification data was issued and/or the administrative validity period of the person identification data began. See also the clarification for expiry_date in [Section 2.4](#24-mandatory-metadata-specified-in-cir-20242977). |
-| trust_anchor | This attribute indicates at least the URL at which a machine-readable version of the trust anchor to be used for verifying the PID can be found or looked up. *Note: This attribute corresponds to the location meant in Annex V point h) or Annex VII point h) of the [European Digital Identity Regulation], which is mandatory for QEAAs. This PID Rulebook adds this as an optional attribute for PIDs as well, so PID Providers are able to ensure that PIDs can be validated by Relying Parties in the same manner as QEAAs.* |
+| **Data Identifier** | **Definition** |**Example value** |
+|------------------------|--------------|------------------|
+| issuance_date | Date (and if possible time) when the person identification data was issued and/or the administrative validity period of the person identification data began. See also the clarification for expiry_date in [Section 2.4](#24-mandatory-metadata-specified-in-cir-20242977). | 19-12-2025 |
+| trust_anchor | This attribute indicates at least the URL at which a machine-readable version of the trust anchor to be used for verifying the PID can be found or looked up. *Note: This attribute corresponds to the location meant in Annex V point h) or Annex VII point h) of the [European Digital Identity Regulation], which is mandatory for QEAAs. This PID Rulebook adds this as an optional attribute for PIDs as well, so PID Providers are able to ensure that PIDs can be validated by Relying Parties in the same manner as QEAAs.* | <https://example.com/trustanchors/pid/> |
+| attestation_legal_category | This attribute indicates that a PID has indeed been issued as a PID. *Note: According to Annex V point a) and Annex VII point a) of the [European Digital Identity Regulation] an indication, at least in a form suitable for automated processing, that the attestation has been issued as a QEAA or Pub-EAA SHALL be defined. This PID Rulebook adds this as an optional attribute for PIDs as well, so PID Providers are able to ensure that PIDs can be validated by Relying Parties in the same manner as QEAAs.* | PID |
 
 ## 3 ISO/IEC 18013-5-compliant encoding of PID
 
@@ -180,6 +186,8 @@ requirements apply:
         short as possible;
         - indefinite-length items SHALL be made into definite-length items.
 
+Note that the presence of each attribute (mandatory or optional) is already specified in [Chapter 2](#2-pid-attributes-and-metadata) above.
+
 | **Data Identifier** | **Attribute identifier** | **Encoding format** |
 |------------------------|--------------|------------------|
 | family_name | family_name | ``tstr`` |
@@ -209,6 +217,7 @@ requirements apply:
 | location_status | - | See [Section 3.1.3](#313-attribute-location_status). |
 | issuance_date | issuance_date | ``tdate`` or ``full-date`` |
 | trust_anchor | trust_anchor | ``tstr`` |
+| attestation_legal_category | attestation_legal_category | ``tstr`` |
 
 #### 3.1.2 Attribute nationality
 
@@ -260,6 +269,7 @@ place_of_birth =
   ? "locality": tstr ; the name of a municipality, city, town, or village
 }
 ```
+
 place_of_birth SHALL contain at least one of the following key-value pairs: ``"country"``, ``"region"``, or ``"locality"``.
 
 ## 4 SD-JWT VC-based encoding of PID
@@ -318,6 +328,7 @@ The following Private Names specific to the attestation type defined in this doc
 | issuing_jurisdiction | issuing_jurisdiction | string | |
 | location_status | - | See [Section 4.1.2](#412-attribute-location_status) | |
 | trust_anchor | trust_anchor | string | |
+| attestation_legal_category | attestation_legal_category | string | |
 
 #### 4.1.2 Attribute location_status
 
@@ -337,8 +348,7 @@ the mandatory claims from the base type. Domestic
 types MAY however define additional claims and display information. Details
 are defined in [SD-JWT VC].
 
-This document defines the base type to be "urn:eudi:pid:1". As a convention, all
-PIDs must use types in the namespace "urn:eudi:pid:".
+Requirement PID_14 in ARF Annex 2 defines the base type to be "urn:eudi:pid:1". As a convention, all PIDs must use types in the namespace "urn:eudi:pid:".
 
 SD-JWT VC specifies Type Metadata as a machine-readable format for information
 regarding a type, including the information on claims such as what is contained
@@ -394,6 +404,35 @@ The example above shows a public key in JWK format.
 Note: Additional technical claims are not shown here, including
 references to the issuer, validity status information, and more.
 
-## 5 References
+## 5 PID usage
+
+Users request issuance of PIDs from PID Providers, manage them in their Wallet Unit, and present attributes from a PID to Relying Parties on request.
+
+PID Providers issue PIDs to Wallet Units on request of Users, and revoke them if necessary.
+
+Relying Parties request attributes from a User's PID, and verify their authenticity and validity (including revocation status, if any).
+
+Users, PID Providers, and Relying Parties do this in compliance with all applicable requirements in the [European Digital Identity Regulation] and the corresponding Implementing Acts, as described in the ARF.
+
+## 6 Trust anchors
+
+PID trust anchors are public keys and associated information, needed by Relying Parties to verify the authenticity of any PID attributes they obtain from Wallet Units.
+
+Member States notify each PID Provider to the Commission as specified in the [European Digital Identity Regulation] and the applicable Implementing Acts, including [CIR 2024/2980](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=OJ:L_202402980). Notification includes the trust anchors of the PID Provider. The Commission will ensure that the trust anchors of notified PID Providers are published in a publicly available Trusted List. Relying Parties can retrieve the trust anchors of all PID Providers from this Trusted List.
+
+## 7 Revocation
+
+PID Providers revoke PIDs, if necessary, in accordance with [CIR 2024/2977](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=OJ:L_202402977) and with [Topic 7](https://github.com/eu-digital-identity-wallet/eudi-doc-architecture-and-reference-framework/blob/main/docs/annexes/annex-2/annex-2.02-high-level-requirements-by-topic.md#a235-topic-7---attestation-revocation-and-revocation-checking) in Annex 2 of the Architecture Reference Framework.
+
+## 8 Compliance
+
+This PID Rulebook complies with all applicable requirements in [Topic 12
+(Attestation Rulebooks)](https://github.com/eu-digital-identity-wallet/eudi-doc-architecture-and-reference-framework/blob/main/docs/annexes/annex-2/annex-2.02-high-level-requirements-by-topic.md#a239-topic-12---attestation-rulebooks) in Annex 2 of the Architecture Reference Framework. It also complies with the [template for Attestation Rulebooks](https://github.com/eu-digital-identity-wallet/eudi-doc-attestation-rulebooks-catalog/blob/main/template/attestation-rulebook-template.md).
+
+The attributes specified in this Rulebook comply with [CIR 2024/2977](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=OJ:L_202402977).
+
+Further requirements in this Rulebook comply with or reference the applicable requirements in the ARF and the relevant Implementing Acts.
+
+## 9 References
 
 See [ARF Chapter 10](https://github.com/eu-digital-identity-wallet/eudi-doc-architecture-and-reference-framework/blob/main/docs/architecture-and-reference-framework-main.md#10-references) of the ARF main document.
