@@ -5,6 +5,8 @@ subtitle: "ARF Annex 3.01 - PID Rulebook"
 
 # ANNEX 3.01 - PID Rulebook
 
+a change
+
 | Version | Date | Description |
 |---------|------------|------------|
 | 1.1 | 4 Sep 2025 | Taking PID Rulebook out of ARF 2.5.0 and into separate GitHub repository. Age verification attributes removed, following CIR 2024/2977. |
