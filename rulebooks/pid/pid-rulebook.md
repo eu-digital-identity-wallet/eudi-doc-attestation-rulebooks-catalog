@@ -8,9 +8,10 @@ subtitle: "ARF Annex 3.01 - PID Rulebook"
 | Version | Date | Description |
 |---------|------------|------------|
 | 1.1 | 4 Sep 2025 | Taking PID Rulebook out of ARF 2.5.0 and into separate GitHub repository. Age verification attributes removed, following CIR 2024/2977. |
-| 1.2 | 2 Oct 2025 | Fixed CDDL error in [Section 3.1.2](#312-attribute-nationality); throughout document, enclosed data types in backticks for more clarity; in [Section 3.1.1](#311-overview), added a few references for clarity; minor textual changes |
+| 1.2 | 2 Oct 2025 | Fixed CDDL error in [Section 3.1.3](#313-attribute-nationality); throughout document, enclosed data types in backticks for more clarity; in [Section 3.1.2](#312-attributes-overview), added a few references for clarity; minor textual changes |
 | 1.3 | 6 Nov 2025 | Adding references to sections in [SD-JWT VC] and [HAIP] in section 4.1.2. Completing changelog (from start of this repo). |
-| 1.4 | 20 Nov 2025 | Adding a reference to [Topic 3](https://github.com/eu-digital-identity-wallet/eudi-doc-attestation-rulebooks-catalog/blob/main/template/attestation-rulebook-template.md) in Annex 2 of the ARF in section 1.1. Making the PID Rulebook fully consistent with the Rulebook template. |
+| 1.4 | 20 Nov 2025 | Adding a reference to [Topic 3](https://github.com/eu-digital-identity-wallet/eudi-doc-architecture-and-reference-framework/blob/main/docs/annexes/annex-2/annex-2.02-high-level-requirements-by-topic.md#a232-topic-3---pid-rulebook) in Annex 2 of the ARF in section 1.1. Making the PID Rulebook fully consistent with the Rulebook template. |
+| 1.5 | 20 Jan 2026 | Processing Member State feedback; fixing broken links to ARF Topic 3 |
 
 ## 1 Introduction
 
@@ -28,7 +29,7 @@ not included in the CIR.
 This document also specifies how a PID and all attributes in it are encoded if
 the PID complies with [ISO/IEC 18013-5] and if it complies with [SD-JWT VC].
 
-This PID Rulebook should be read in conjunction with the high-level requirements for PIDs in [Topic 3](https://github.com/eu-digital-identity-wallet/eudi-doc-attestation-rulebooks-catalog/blob/main/template/attestation-rulebook-template.md) in Annex 2 of the Architecture Reference Framework. In particular, the values to be used for the namespace and document type for [ISO/IEC 18013-5]-compliant PIDs and for the vct claim in [SD-JWT VC]-compliant PIDs are defined in Topic 3.
+This PID Rulebook should be read in conjunction with the high-level requirements for PIDs in [Topic 3](https://github.com/eu-digital-identity-wallet/eudi-doc-architecture-and-reference-framework/blob/main/docs/annexes/annex-2/annex-2.02-high-level-requirements-by-topic.md#a232-topic-3---pid-rulebook) in Annex 2 of the Architecture Reference Framework. In particular, the values to be used for the namespace and document type for [ISO/IEC 18013-5]-compliant PIDs and for the vct claim in [SD-JWT VC]-compliant PIDs are defined in Topic 3.
 
 Person identification data for the legal person is out of scope of this document.
 
@@ -65,7 +66,7 @@ statements of fact.
 
 ### 1.4 Terminology
 
-This document uses the terminology specified in [Annex 1](../annex-1/annex-1-definitions.md) of the ARF.
+This document uses the terminology specified in [Annex 1](https://github.com/eu-digital-identity-wallet/eudi-doc-architecture-and-reference-framework/blob/main/docs/annexes/annex-1/annex-1-definitions.md) of the ARF.
 
 ## 2 PID attributes and metadata
 
@@ -111,9 +112,9 @@ Note that the data type for each attribute is not specified in this chapter, but
 | resident_city | The municipality, city, town, or village where the user to whom the person identification data relates currently resides. | Leiden |
 | resident_postal_code | The postal code of the place where the user to whom the person identification data relates currently resides. | 2312 JD |
 | resident_street | The name of the street where the user to whom the person identification data relates currently resides. | Rietveld |
-| resident_house_number | The house number where the user to whom the person identification data relates currently resides, including any affix or suffix. |  1 |
+| resident_house_number | The house number where the user to whom the person identification data relates currently resides, including any affix or suffix. | 1 |
 | personal_administrative_number | A value assigned to the natural person that is unique among all personal administrative numbers issued by the provider of person identification data. Where Member States opt to include this attribute, they shall describe in their electronic identification schemes under which the person identification data is issued, the policy that they apply to the values of this attribute, including, where applicable, specific conditions for the processing of this value. | 123456782 |
-| portrait | Facial image of the wallet user compliant with ISO 19794-5 or ISO 39794 specifications. **Further clarification added in this PID Rulebook:** The detailed format of the portrait is specified in requirement PID_03 in [Annex 2, Topic 3](../annex-2/annex-2-high-level-requirements.md#a233-topic-3---pid-rulebook). | - |
+| portrait | Facial image of the wallet user compliant with ISO 19794-5 or ISO 39794 specifications. **Further clarification added in this PID Rulebook:** The detailed format of the portrait is specified in requirement PID_03 in [Annex 2, Topic 3](https://github.com/eu-digital-identity-wallet/eudi-doc-architecture-and-reference-framework/blob/main/docs/annexes/annex-2/annex-2.02-high-level-requirements-by-topic.md#a232-topic-3---pid-rulebook). | - |
 | family_name_birth | Last name(s) or surname(s) of the User to whom the person identification data relates at the time of birth. | Poepjes |
 | given_name_birth | First name(s), including middle name(s), of the User to whom the person identification data relates at the time of birth. | Björn |
 | sex | Values shall be one of the following: 0 = not known; 1 = male; 2 = female; 3 = other; 4 = inter; 5 = diverse; 6 = open; 9 = not applicable. For values 0, 1, 2 and 9, ISO/IEC 5218 applies. | 1 |
@@ -148,7 +149,13 @@ Note that the data type for each attribute is not specified in this chapter, but
 
 ### 3.1 Encoding of PID attributes and metadata
 
-#### 3.1.1 Overview
+#### 3.1.1 Document type and namespace
+
+As specified in [Topic 3](https://github.com/eu-digital-identity-wallet/eudi-doc-architecture-and-reference-framework/blob/main/docs/annexes/annex-2/annex-2.02-high-level-requirements-by-topic.md#a232-topic-3---pid-rulebook) in Annex 2 of the ARF, "eu.europa.ec.eudi.pid.1" will be used as the attestation type for ISO/IEC 18013-5-compliant PIDs.
+
+Similarly, "eu.europa.ec.eudi.pid.1" will be used for the namespace of the attributes specified below.
+
+#### 3.1.2 Attributes overview
 
 The ISO/IEC 18013-5-compliant encoding of PID attributes and metadata is
 specified in the table below. The table contains the following information for
@@ -192,9 +199,9 @@ Note that the presence of each attribute (mandatory or optional) is already spec
 |------------------------|--------------|------------------|
 | family_name | family_name | ``tstr`` |
 | given_name | given_name | ``tstr`` |
-| birth_date | birth_date | ``full-date``, see [Section 3.1.4](#314-attribute-birth_date). |
-| birth_place | place_of_birth | ``place_of_birth``, see [Section 3.1.5](#315-attribute-place_of_birth). |
-| nationality | nationality | ``nationalities``, see [Section 3.1.2](#312-attribute-nationality). |
+| birth_date | birth_date | ``full-date``, see [Section 3.1.5](#315-attribute-birth_date). |
+| birth_place | place_of_birth | ``place_of_birth``, see [Section 3.1.6](#316-attribute-place_of_birth). |
+| nationality | nationality | ``nationalities``, see [Section 3.1.3](#313-attribute-nationality). |
 | resident_address | resident_address | ``tstr`` |
 | resident_country | resident_country | ``tstr`` |
 | resident_state | resident_state | ``tstr`` |
@@ -214,12 +221,12 @@ Note that the presence of each attribute (mandatory or optional) is already spec
 | issuing_country | issuing_country | ``tstr`` |
 | document_number | document_number | ``tstr`` |
 | issuing_jurisdiction | issuing_jurisdiction | ``tstr`` |
-| location_status | - | See [Section 3.1.3](#313-attribute-location_status). |
+| location_status | - | See [Section 3.1.4](#314-attribute-location_status). |
 | issuance_date | issuance_date | ``tdate`` or ``full-date`` |
 | trust_anchor | trust_anchor | ``tstr`` |
 | attestation_legal_category | attestation_legal_category | ``tstr`` |
 
-#### 3.1.2 Attribute nationality
+#### 3.1.3 Attribute nationality
 
 The attribute nationality is encoded as a type ``nationalities``, i.e., an array of Alpha-2 country codes as specified in ISO 3166-1. Using CDDL notation as specified in RFC 8610, the
 encoding of this attribute is:
@@ -240,23 +247,21 @@ User approves the presentation of the nationality attribute. A potential
 solution to this challenge is for the PID Provider to include only one
 nationality in the nationality attribute, and for the remaining nationalities
 use one or more domestic data attributes specified according to requirement
-PID_06 in [Annex 2, Topic 3](../annex-2/annex-2-high-level-requirements.md#a233-topic-3---pid-rulebook).
+PID_06 in [Annex 2, Topic 3](https://github.com/eu-digital-identity-wallet/eudi-doc-architecture-and-reference-framework/blob/main/docs/annexes/annex-2/annex-2.02-high-level-requirements-by-topic.md#a232-topic-3---pid-rulebook).
 
-#### 3.1.3 Attribute location_status
+#### 3.1.4 Attribute location_status
 
 For ISO/IEC 18013-5-compliant PIDs, the attribute location_status is
 absent, since the PID issuer will add revocation information, if needed, to the MSO as specified in [ISO/IEC 18013-5].
 
-#### 3.1.4 Attribute birth_date
+#### 3.1.5 Attribute birth_date
 
-For PIDs compliant with ISO/IEC 18013-5, dates are encoded as specified in RFC
-8943. This encoding does not contain provisions for encoding partial dates. This
+For PIDs compliant with ISO/IEC 18013-5, dates are encoded as specified in RFC 8949 (which references RFC 3339). This encoding does not contain provisions for encoding partial dates. This
 may cause challenges in case the birth date of a User is not (fully) known. To
-deal with such cases, a PID Provider could adopt a policy to choose appropriate
-values for the unknown date elements. However, mandating such a policy is out of
+deal with such cases, a PID Provider could adopt a policy to choose appropriate (and RFC 3339-compliant) values for the unknown date elements. However, mandating such a policy is out of
 scope of this document.
 
-#### 3.1.5 Attribute place_of_birth
+#### 3.1.6 Attribute place_of_birth
 
 The attribute place_of_birth is encoded as a type ``place_of_birth``.
 Using CDDL notation as specified in RFC 8610, the encoding of this attribute is:
@@ -305,12 +310,11 @@ The following IANA registered claim names are to be used for PIDs:
 | resident_city | address.locality | string | Section 5.1 of [OIDC] |
 | resident_postal_code | address.postal_code | string | Section 5.1 of [OIDC] |
 | resident_street | address.street_address | string | Section 5.1 of [OIDC] |
-| resident_house_number | address.house_number | string | Section 5.1 of [OIDC] |
 | family_name_birth | birth_family_name | string | Section 4.1 of [EKYC] |
 | given_name_birth | birth_given_name | string | Section 4.1 of [EKYC] |
 | email_address | email | string | Section 5.1 of [OIDC] |
 | mobile_phone_number | phone_number | string | Section 5.1 of [OIDC] |
-| portrait | picture | string; data URL containing the base64-encoded portrait in JPEG format according to PID_03 in [Annex 2, Topic 3](../annex-2/annex-2-high-level-requirements.md#a233-topic-3---pid-rulebook)  | Section 5.1 of [OIDC] |
+| portrait | picture | string; data URL containing the base64-encoded portrait in JPEG format according to PID_03 in [Annex 2, Topic 3](https://github.com/eu-digital-identity-wallet/eudi-doc-architecture-and-reference-framework/blob/main/docs/annexes/annex-2/annex-2.02-high-level-requirements-by-topic.md#a232-topic-3---pid-rulebook)  | Section 5.1 of [OIDC] |
 
 Note: The standard JWT claims nbf and exp are used to express the technical validity period of a SD-JWT VC-compliant PID.
 
@@ -321,7 +325,8 @@ The following Private Names specific to the attestation type defined in this doc
 | expiry_date | date_of_expiry | string | ISO 8601-1 [ISO8601‑1] YYYY-MM-DD format, as defined in Section 5.4.4.2 of [EKYC Schema] |
 | issuance_date | date_of_issuance | string | ISO 8601-1 [ISO8601‑1] YYYY-MM-DD format, as defined in Section 5.4.4.2 of [EKYC Schema] |
 | personal_administrative_number | personal_administrative_number | string | |
-| sex | sex | number | numeric encoding as described in [Section 2.3](#23-optional-attributes-specified-in-cir-20242977); gender from [OIDC] uses a different value range and is therefore not used |
+| sex | sex | number | Numeric encoding as described in [Section 2.3](#23-optional-attributes-specified-in-cir-20242977); ``gender`` from [OIDC] uses a different value range and is therefore not used |
+| resident_house_number | address.house_number | string | This document extends the specification of ``address`` in [OIDC] with an additional member ``address.house_number`` |
 | issuing_authority | issuing_authority | string | |
 | issuing_country | issuing_country | string | |
 | document_number | document_number | string | |
@@ -352,7 +357,7 @@ Requirement PID_14 in ARF Annex 2 defines the base type to be "urn:eudi:pid:1". 
 
 SD-JWT VC specifies Type Metadata as a machine-readable format for information
 regarding a type, including the information on claims such as what is contained
-in this document. Requirement PID_15 in [Annex 2, Topic 3](../annex-2/annex-2-high-level-requirements.md#a233-topic-3---pid-rulebook) requires that the information on the
+in this document. Requirement PID_15 in [Annex 2, Topic 3](https://github.com/eu-digital-identity-wallet/eudi-doc-architecture-and-reference-framework/blob/main/docs/annexes/annex-2/annex-2.02-high-level-requirements-by-topic.md#a232-topic-3---pid-rulebook) requires that the information on the
 common EU-wide type as well as on any domestic types is published and
 accessible in a catalog.
 
