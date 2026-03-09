@@ -2,8 +2,9 @@
 |---------|------------|------------|
 | 1.0 | 24-06-2025 | First version |
 | 1.1 | 20-08-2025 | Allowing private names specific to the attestation type for JSON claims; adding requirements to specify whether a claim is selectively disclosable. |
-| 1.2 | 07-10-2025 | Fixing markdown issues; adding requirement to Chapter 4 regarding the need to specify whether an attestation is device-bound or non device-bound. |
+| 1.2 | 07-10-2025 | Fixing markdown issues; adding requirement to Chapter 4 regarding the need to specify whether an attestation is device-bound or non-device-bound. |
 | 1.3 | 02-12-2025 | Add complete change history; include the optional ``cryptographically_bound_to`` attribute specified in ARB_28; removed recommendation to define a JSON schema for SD-JWT VC-based attestations. |
+| 1.4 | 09-03-2026 | Fixing incorrect 'device-bound' working related to cryptographically_bound_to attribute in chapter 4. |
 
 # Attestation Rulebook for attestations of type  *ADD THE ATTESTATION TYPE HERE*
 
@@ -391,9 +392,11 @@ this attestation type (e.g., signature verification, freshness checks)*
 *Furthermore, provide potential presentation requirements, e.g., are there specific
 requirements for how this attestation must be presented (e.g., online, offline, specific protocols)?"*
 
-*Specify whether an attestation of this type must be device-bound or non device-bound, see ARB_34 in [Topic 12]*
+*Specify whether an attestation of this type SHALL or SHOULD be device-bound or non-device-bound, see ARB_34 in [Topic 12]*
 
-*If an attestation of this type is device-bound, include the optional attribute  ``cryptographically_bound_to`` (as defined in ARB_28) in [Section 2.5](#26-optional-metadata). If present in an Attestation Rulebook, the identifier for this attribute SHALL be "`cryptographically_bound_to" for both ISO/IEC 18013-5 and SD-JWT VC-compliant attestations, and its contents SHALL be tstr or string (as applicable) containing an attestation type or vct (see ARB_05).*
+*If an attestation of this type is device-bound, specify if it SHALL, SHOULD or MAY be cryptographically bound to another type of attestation on the same Wallet Unit. If needed (based on this decision), include the attribute `cryptographically_bound_to` defined in ARB_28 as an optional, recommended, or mandatory attribure in [Section 2.5](#26-optional-metadata). If present in an Attestation Rulebook, the identifier for this attribute SHALL be "cryptographically_bound_to" for both ISO/IEC 18013-5 and SD-JWT VC-compliant attestations, and its contents SHALL be a `tstr` or `string` (as applicable) containing an attestation type or vct (see ARB_05). Finally, specify the value of the `tstr` or `string`.* 
+
+*EXAMPLE   In case an attestation type of this type must be bound to a PID, the value of the `tstr` or `string` must be set to "eu.europa.ec.eudi.pid.1" or "urn:eudi:pid:1". Note that it does not matter whether the attestation type or the vct value is used.*
 
 *Finally, in this section information about potential transactional data
 SHALL be defined; see [Topic 20] of Annex 2 of the ARF.*
