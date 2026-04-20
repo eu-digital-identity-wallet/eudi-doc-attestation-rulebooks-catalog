@@ -47,7 +47,7 @@ attributes and metadata are encoded in case the PID complies with [ISO/IEC
 18013-5].
 - [Chapter 4](#4-sd-jwt-vc-based-encoding-of-pid) specifies how the PID
 attributes and metadata are encoded in case the PID complies with [SD-JWT VC].
-= [Chapter 5](#5-pid-usage) specifies how PIDs are issued and used.
+- [Chapter 5](#5-pid-usage) specifies how PIDs are issued and used.
 - [Chapter 6](#6-trust-anchors) discusses mechanisms for the provision of trust anchors that shall be used for the verification of PIDs.
 - [Chapter 7](#7-revocation) discusses how PIDs can be revoked, and how Relying Parties can perform revocation checking.
 - [Chapter 8](#8-compliance) states how this PID Rulebook complies with the general EUDI framework, the ARF, and relevant Regulations.
