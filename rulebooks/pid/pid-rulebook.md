@@ -101,6 +101,7 @@ Note that the data type for each attribute is not specified in this chapter, but
 | birth_date | Day, month, and year on which the user to whom the person identification data relates was born. | 12-02-1978 |
 | birth_place | The country as an alpha-2 country code as specified in ISO 3166-1, or the state, province, district, or local area or the municipality, city, town, or village where the user to whom the person identification data relates was born. | Amsterdam |
 | nationality | One or more alpha-2 country codes as specified in ISO 3166-1, representing the nationality of the user to whom the person identification data relates. | NL|
+| portrait | Except where the user explicitly opts out, where applicable, the facial image of the user to whom the person identification data relates, compliant with the quality requirements for a full frontal image type as set out in ISO/IEC 39794-5 or, for backward compatibility, ISO/IEC 19794-5, clauses 8.2, 8.3 and 8.4, provided as encoded image data without the headers or blocks as specified in clause 5 of ISO/IEC 19794-5, except for the image data itself (a JPEG) shall apply from [24 months] | - |
 
 ### 2.3 Optional attributes specified in CIR 2024/2977
 
@@ -114,7 +115,6 @@ Note that the data type for each attribute is not specified in this chapter, but
 | resident_street | The name of the street where the user to whom the person identification data relates currently resides. | Rietveld |
 | resident_house_number | The house number where the user to whom the person identification data relates currently resides, including any affix or suffix. | 1 |
 | personal_administrative_number | A value assigned to the natural person that is unique among all personal administrative numbers issued by the provider of person identification data. Where Member States opt to include this attribute, they shall describe in their electronic identification schemes under which the person identification data is issued, the policy that they apply to the values of this attribute, including, where applicable, specific conditions for the processing of this value. | 123456782 |
-| portrait | Facial image of the wallet user compliant with ISO 19794-5 or ISO 39794 specifications. **Further clarification added in this PID Rulebook:** The detailed format of the portrait is specified in requirement PID_03 in [Annex 2, Topic 3](https://github.com/eu-digital-identity-wallet/eudi-doc-architecture-and-reference-framework/blob/main/docs/annexes/annex-2/annex-2.02-high-level-requirements-by-topic.md#a232-topic-3---pid-rulebook). | - |
 | family_name_birth | Last name(s) or surname(s) of the User to whom the person identification data relates at the time of birth. | Poepjes |
 | given_name_birth | First name(s), including middle name(s), of the User to whom the person identification data relates at the time of birth. | Björn |
 | sex | Values shall be one of the following: 0 = not known; 1 = male; 2 = female; 3 = other; 4 = inter; 5 = diverse; 6 = open; 9 = not applicable. For values 0, 1, 2 and 9, ISO/IEC 5218 applies. | 1 |
@@ -210,7 +210,7 @@ Note that the presence of each attribute (mandatory or optional) is already spec
 | resident_street | resident_street | ``tstr`` |
 | resident_house_number | resident_house_number | ``tstr`` |
 | personal_administrative_number | personal_administrative_number | ``tstr`` |
-| portrait | portrait | ``bstr``; see additional information in [Section 2.3](#23-optional-attributes-specified-in-cir-20242977)|
+| portrait | portrait | ``bstr``|
 | family_name_birth | family_name_birth | ``tstr`` |
 | given_name_birth | given_name_birth | ``tstr`` |
 | sex | sex | ``uint``; see additional information in [Section 2.3](#23-optional-attributes-specified-in-cir-20242977)  |
@@ -314,7 +314,7 @@ The following IANA registered claim names are to be used for PIDs:
 | given_name_birth | birth_given_name | string | Section 4.1 of [EKYC] |
 | email_address | email | string | Section 5.1 of [OIDC] |
 | mobile_phone_number | phone_number | string | Section 5.1 of [OIDC] |
-| portrait | picture | string; data URL containing the base64-encoded portrait in JPEG format according to PID_03 in [Annex 2, Topic 3](https://github.com/eu-digital-identity-wallet/eudi-doc-architecture-and-reference-framework/blob/main/docs/annexes/annex-2/annex-2.02-high-level-requirements-by-topic.md#a232-topic-3---pid-rulebook)  | Section 5.1 of [OIDC] |
+| portrait | picture | string; data URL containing the base64-encoded portrait in JPEG format | Section 5.1 of [OIDC] |
 
 Note: The standard JWT claims nbf and exp are used to express the technical validity period of a SD-JWT VC-compliant PID.
 
