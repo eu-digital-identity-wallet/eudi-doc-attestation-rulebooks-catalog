@@ -47,7 +47,7 @@ attributes and metadata are encoded in case the PID complies with [ISO/IEC
 18013-5].
 - [Chapter 4](#4-sd-jwt-vc-based-encoding-of-pid) specifies how the PID
 attributes and metadata are encoded in case the PID complies with [SD-JWT VC].
-= [Chapter 5](#5-pid-usage) specifies how PIDs are issued and used.
+- [Chapter 5](#5-pid-usage) specifies how PIDs are issued and used.
 - [Chapter 6](#6-trust-anchors) discusses mechanisms for the provision of trust anchors that shall be used for the verification of PIDs.
 - [Chapter 7](#7-revocation) discusses how PIDs can be revoked, and how Relying Parties can perform revocation checking.
 - [Chapter 8](#8-compliance) states how this PID Rulebook complies with the general EUDI framework, the ARF, and relevant Regulations.
@@ -184,7 +184,7 @@ requirements apply:
     attributes, unless otherwise indicated:
         - Fractions of seconds SHALL NOT be used;
         - A local offset from UTC SHALL NOT be used; the time-offset defined in
-        [RFC 3339] SHALL be to "Z".
+        [RFC 3339] SHALL be set to "Z".
     - RFC 8949, section 4.2, describes four rules for canonical CBOR. Three of
     those rules SHALL be implemented for all CBOR structures in PIDs, as
     follows:
