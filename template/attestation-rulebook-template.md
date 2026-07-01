@@ -239,7 +239,7 @@ date formats, etc). For example:*
     attributes, unless otherwise indicated:
         * Fractions of seconds SHALL NOT be used;
         * A local offset from UTC SHALL NOT be used; the time-offset defined in
-        [RFC 3339] SHALL be to "Z".
+        [RFC 3339] SHALL be set to "Z".
     * [RFC 8949], section 4.2, describes four rules for canonical CBOR. Three of
     those rules SHALL be implemented for all CBOR structures, as
     follows:
