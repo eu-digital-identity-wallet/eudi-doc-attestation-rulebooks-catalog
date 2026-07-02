@@ -47,7 +47,7 @@ attributes and metadata are encoded in case the PID complies with [ISO/IEC
 18013-5].
 - [Chapter 4](#4-sd-jwt-vc-based-encoding-of-pid) specifies how the PID
 attributes and metadata are encoded in case the PID complies with [SD-JWT VC].
-= [Chapter 5](#5-pid-usage) specifies how PIDs are issued and used.
+- [Chapter 5](#5-pid-usage) specifies how PIDs are issued and used.
 - [Chapter 6](#6-trust-anchors) discusses mechanisms for the provision of trust anchors that shall be used for the verification of PIDs.
 - [Chapter 7](#7-revocation) discusses how PIDs can be revoked, and how Relying Parties can perform revocation checking.
 - [Chapter 8](#8-compliance) states how this PID Rulebook complies with the general EUDI framework, the ARF, and relevant Regulations.
@@ -101,6 +101,7 @@ Note that the data type for each attribute is not specified in this chapter, but
 | birth_date | Day, month, and year on which the user to whom the person identification data relates was born. | 12-02-1978 |
 | birth_place | The country as an alpha-2 country code as specified in ISO 3166-1, or the state, province, district, or local area or the municipality, city, town, or village where the user to whom the person identification data relates was born. | Amsterdam |
 | nationality | One or more alpha-2 country codes as specified in ISO 3166-1, representing the nationality of the user to whom the person identification data relates. | NL|
+| portrait | Except where the user explicitly opts out, where applicable, the facial image of the user to whom the person identification data relates, compliant with the quality requirements for a full frontal image type as set out in ISO/IEC 39794-5 or, for backward compatibility, ISO/IEC 19794-5, clauses 8.2, 8.3 and 8.4, provided as encoded image data without the headers or blocks as specified in clause 5 of ISO/IEC 19794-5, except for the image data itself (a JPEG). Mandatory inclusion of the `portrait` attribute shall apply as of 24 months after entry into force of the Regulation amending [CIR 2024/2977].| - |
 
 ### 2.3 Optional attributes specified in CIR 2024/2977
 
@@ -114,7 +115,6 @@ Note that the data type for each attribute is not specified in this chapter, but
 | resident_street | The name of the street where the user to whom the person identification data relates currently resides. | Rietveld |
 | resident_house_number | The house number where the user to whom the person identification data relates currently resides, including any affix or suffix. | 1 |
 | personal_administrative_number | A value assigned to the natural person that is unique among all personal administrative numbers issued by the provider of person identification data. Where Member States opt to include this attribute, they shall describe in their electronic identification schemes under which the person identification data is issued, the policy that they apply to the values of this attribute, including, where applicable, specific conditions for the processing of this value. | 123456782 |
-| portrait | Facial image of the wallet user compliant with ISO 19794-5 or ISO 39794 specifications. **Further clarification added in this PID Rulebook:** The detailed format of the portrait is specified in requirement PID_03 in [Annex 2, Topic 3](https://github.com/eu-digital-identity-wallet/eudi-doc-architecture-and-reference-framework/blob/main/docs/annexes/annex-2/annex-2.02-high-level-requirements-by-topic.md#a232-topic-3---pid-rulebook). | - |
 | family_name_birth | Last name(s) or surname(s) of the User to whom the person identification data relates at the time of birth. | Poepjes |
 | given_name_birth | First name(s), including middle name(s), of the User to whom the person identification data relates at the time of birth. | Björn |
 | sex | Values shall be one of the following: 0 = not known; 1 = male; 2 = female; 3 = other; 4 = inter; 5 = diverse; 6 = open; 9 = not applicable. For values 0, 1, 2 and 9, ISO/IEC 5218 applies. | 1 |
@@ -168,28 +168,28 @@ presentation requests and responses according to [ISO/IEC 18013-5].
 - The third column indicates the encoding of each attribute. This column uses
 CDDL representation types defined in [RFC 8610]. The following notes and
 requirements apply:
-    - ``tstr``, ``uint``, ``bstr``, ``bool`` and ``tdate`` are CDDL representation types defined in [RFC 8610].
-    - Regarding type ``tstr``: this document confirms that, as specified in RFC
-    8949, a ``tstr`` SHALL be encoded in UTF-8 and SHALL support the full Unicode
+    - `tstr`, `uint`, `bstr`, `bool` and `tdate` are CDDL representation types defined in [RFC 8610].
+    - Regarding type `tstr`: this document confirms that, as specified in RFC
+    8949, a `tstr` SHALL be encoded in UTF-8 and SHALL support the full Unicode
     range.
-    - All attributes having encoding type ``tstr`` SHALL have a maximum length of
+    - All attributes having encoding type `tstr` SHALL have a maximum length of
     150 characters.
-    - This document specifies ``full-date`` as ``full-date = #6.1004(tstr)``, where tag
+    - This document specifies `full-date` as `full-date = #6.1004(tstr)`, where tag
     1004 is specified in [RFC 8943].
-    - In accordance with [RFC 8949], section 3.4.1, a ``tdate`` attribute SHALL
+    - In accordance with [RFC 8949], section 3.4.1, a `tdate` attribute SHALL
     contain a date-time string as specified in [RFC 3339]. In accordance with
-    [RFC 8943], a ``full-date`` attribute SHALL contain a full-date string as
+    [RFC 8943], a `full-date` attribute SHALL contain a full-date string as
     specified in [RFC 3339].
     - The following requirements apply to the representation of dates in
     attributes, unless otherwise indicated:
         - Fractions of seconds SHALL NOT be used;
         - A local offset from UTC SHALL NOT be used; the time-offset defined in
-        [RFC 3339] SHALL be to "Z".
+        [RFC 3339] SHALL be set to "Z".
     - RFC 8949, section 4.2, describes four rules for canonical CBOR. Three of
     those rules SHALL be implemented for all CBOR structures in PIDs, as
     follows:
         - integers (major types 0 and 1) SHALL be as small as possible;
-        - the expression of the length in a ``bstr``, ``tstr``, array or map SHALL be as
+        - the expression of the length in a `bstr`, `tstr`, array or map SHALL be as
         short as possible;
         - indefinite-length items SHALL be made into definite-length items.
 
@@ -197,45 +197,45 @@ Note that the presence of each attribute (mandatory or optional) is already spec
 
 | **Data Identifier** | **Attribute identifier** | **Encoding format** |
 |------------------------|--------------|------------------|
-| family_name | family_name | ``tstr`` |
-| given_name | given_name | ``tstr`` |
-| birth_date | birth_date | ``full-date``, see [Section 3.1.5](#315-attribute-birth_date). |
-| birth_place | place_of_birth | ``place_of_birth``, see [Section 3.1.6](#316-attribute-place_of_birth). |
-| nationality | nationality | ``nationalities``, see [Section 3.1.3](#313-attribute-nationality). |
-| resident_address | resident_address | ``tstr`` |
-| resident_country | resident_country | ``tstr`` |
-| resident_state | resident_state | ``tstr`` |
-| resident_city | resident_city | ``tstr`` |
-| resident_postal_code | resident_postal_code | ``tstr`` |
-| resident_street | resident_street | ``tstr`` |
-| resident_house_number | resident_house_number | ``tstr`` |
-| personal_administrative_number | personal_administrative_number | ``tstr`` |
-| portrait | portrait | ``bstr``; see additional information in [Section 2.3](#23-optional-attributes-specified-in-cir-20242977)|
-| family_name_birth | family_name_birth | ``tstr`` |
-| given_name_birth | given_name_birth | ``tstr`` |
-| sex | sex | ``uint``; see additional information in [Section 2.3](#23-optional-attributes-specified-in-cir-20242977)  |
-| email_address | email_address | ``tstr`` |
-| mobile_phone_number | mobile_phone_number | ``tstr`` |
-| expiry_date | expiry_date | ``tdate`` or ``full-date`` |
-| issuing_authority | issuing_authority | ``tstr`` |
-| issuing_country | issuing_country | ``tstr`` |
-| document_number | document_number | ``tstr`` |
-| issuing_jurisdiction | issuing_jurisdiction | ``tstr`` |
+| family_name | family_name | `tstr` |
+| given_name | given_name | `tstr` |
+| birth_date | birth_date | `full-date`, see [Section 3.1.5](#315-attribute-birth_date). |
+| birth_place | place_of_birth | `place_of_birth`, see [Section 3.1.6](#316-attribute-place_of_birth). |
+| nationality | nationality | `nationalities`, see [Section 3.1.3](#313-attribute-nationality). |
+| resident_address | resident_address | `tstr` |
+| resident_country | resident_country | `tstr` |
+| resident_state | resident_state | `tstr` |
+| resident_city | resident_city | `tstr` |
+| resident_postal_code | resident_postal_code | `tstr` |
+| resident_street | resident_street | `tstr` |
+| resident_house_number | resident_house_number | `tstr` |
+| personal_administrative_number | personal_administrative_number | `tstr` |
+| portrait | portrait | `bstr`|
+| family_name_birth | family_name_birth | `tstr` |
+| given_name_birth | given_name_birth | `tstr` |
+| sex | sex | `uint`; see additional information in [Section 2.3](#23-optional-attributes-specified-in-cir-20242977)  |
+| email_address | email_address | `tstr` |
+| mobile_phone_number | mobile_phone_number | `tstr` |
+| expiry_date | expiry_date | `tdate` or `full-date` |
+| issuing_authority | issuing_authority | `tstr` |
+| issuing_country | issuing_country | `tstr` |
+| document_number | document_number | `tstr` |
+| issuing_jurisdiction | issuing_jurisdiction | `tstr` |
 | location_status | - | See [Section 3.1.4](#314-attribute-location_status). |
-| issuance_date | issuance_date | ``tdate`` or ``full-date`` |
-| trust_anchor | trust_anchor | ``tstr`` |
-| attestation_legal_category | attestation_legal_category | ``tstr`` |
+| issuance_date | issuance_date | `tdate` or `full-date` |
+| trust_anchor | trust_anchor | `tstr` |
+| attestation_legal_category | attestation_legal_category | `tstr` |
 
 #### 3.1.3 Attribute nationality
 
-The attribute nationality is encoded as a type ``nationalities``, i.e., an array of Alpha-2 country codes as specified in ISO 3166-1. Using CDDL notation as specified in RFC 8610, the
+The attribute nationality is encoded as a type `nationalities`, i.e., an array of Alpha-2 country codes as specified in ISO 3166-1. Using CDDL notation as specified in RFC 8610, the
 encoding of this attribute is:
 
-``` cddl
+`` cddl
 nationalities = [+ CountryCode]
 
 CountryCode = tstr ; Alpha-2 country code specified in ISO 3166-1
-```
+``
 
 Note: If the User to whom the person identification data relates has multiple
 nationalities (and the PID Provider is willing to attest to these multiple
@@ -263,19 +263,19 @@ scope of this document.
 
 #### 3.1.6 Attribute place_of_birth
 
-The attribute place_of_birth is encoded as a type ``place_of_birth``.
+The attribute place_of_birth is encoded as a type `place_of_birth`.
 Using CDDL notation as specified in RFC 8610, the encoding of this attribute is:
   
-``` cddl
+`` cddl
 place_of_birth =
 {
   ? "country": tstr  ; a single alpha-2 country code as specified in ISO 3166-1
   ? "region": tstr   ; the name of a state, province, district, or local area
   ? "locality": tstr ; the name of a municipality, city, town, or village
 }
-```
+``
 
-place_of_birth SHALL contain at least one of the following key-value pairs: ``"country"``, ``"region"``, or ``"locality"``.
+place_of_birth SHALL contain at least one of the following key-value pairs: `"country"`, `"region"`, or `"locality"`.
 
 ## 4 SD-JWT VC-based encoding of PID
 
@@ -314,7 +314,7 @@ The following IANA registered claim names are to be used for PIDs:
 | given_name_birth | birth_given_name | string | Section 4.1 of [EKYC] |
 | email_address | email | string | Section 5.1 of [OIDC] |
 | mobile_phone_number | phone_number | string | Section 5.1 of [OIDC] |
-| portrait | picture | string; data URL containing the base64-encoded portrait in JPEG format according to PID_03 in [Annex 2, Topic 3](https://github.com/eu-digital-identity-wallet/eudi-doc-architecture-and-reference-framework/blob/main/docs/annexes/annex-2/annex-2.02-high-level-requirements-by-topic.md#a232-topic-3---pid-rulebook)  | Section 5.1 of [OIDC] |
+| portrait | picture | string; data URL containing the base64-encoded portrait in JPEG format | Section 5.1 of [OIDC] |
 
 Note: The standard JWT claims nbf and exp are used to express the technical validity period of a SD-JWT VC-compliant PID.
 
@@ -325,8 +325,8 @@ The following Private Names specific to the attestation type defined in this doc
 | expiry_date | date_of_expiry | string | ISO 8601-1 [ISO8601‑1] YYYY-MM-DD format, as defined in Section 5.4.4.2 of [EKYC Schema] |
 | issuance_date | date_of_issuance | string | ISO 8601-1 [ISO8601‑1] YYYY-MM-DD format, as defined in Section 5.4.4.2 of [EKYC Schema] |
 | personal_administrative_number | personal_administrative_number | string | |
-| sex | sex | number | Numeric encoding as described in [Section 2.3](#23-optional-attributes-specified-in-cir-20242977); ``gender`` from [OIDC] uses a different value range and is therefore not used |
-| resident_house_number | address.house_number | string | This document extends the specification of ``address`` in [OIDC] with an additional member ``address.house_number`` |
+| sex | sex | number | Numeric encoding as described in [Section 2.3](#23-optional-attributes-specified-in-cir-20242977); `gender` from [OIDC] uses a different value range and is therefore not used |
+| resident_house_number | address.house_number | string | This document extends the specification of `address` in [OIDC] with an additional member `address.house_number` |
 | issuing_authority | issuing_authority | string | |
 | issuing_country | issuing_country | string | |
 | document_number | document_number | string | |
@@ -365,7 +365,7 @@ accessible in a catalog.
 
 EXAMPLE: The following example shows the payload of a PID in SD-JWT VC format before the encoding into the SD-JWT format.
 
-```json
+``json
 {
     "vct": "urn:eudi:pid:de:1",
 
@@ -401,7 +401,7 @@ EXAMPLE: The following example shows the payload of a PID in SD-JWT VC format be
     "issuing_authority": "DE",
     "issuing_country": "DE"
 }
-```
+``
 
 Note: The `cnf` claim is used for expressing key binding in SD-JWT VCs.
 The example above shows a public key in JWK format.
