@@ -43,7 +43,7 @@ metadata on a generic level, regardless of the encoding used for the PID. Most
 of the content of this chapter is a direct copy of the Annex of Commission
 Implementing Regulation 2024/2977 on PID and EAA. However, a few additional
 attributes are specified in this chapter.
-- [Chapter 3](#3-iec-18013-5-compliant-encoding-of-pid) specifies how the PID
+- [Chapter 3](#3-isoiec-18013-5-compliant-encoding-of-pid) specifies how the PID
 attributes and metadata are encoded in case the PID complies with [ISO/IEC
 18013-5].
 - [Chapter 4](#4-sd-jwt-vc-based-encoding-of-pid) specifies how the PID
@@ -86,12 +86,12 @@ All data identifiers and definitions in this chapter are independent of any
 encoding used. Consequently,
 
 - the data identifiers in these tables are not necessarily the same as the
-attribute identifiers used for PIDs complying with [ISO/IEC 18013-5]. [Chapter 3](#3-iec-18013-5-compliant-encoding-of-pid) specifies the attribute
+attribute identifiers used for PIDs complying with [ISO/IEC 18013-5]. [Chapter 3](#3-isoiec-18013-5-compliant-encoding-of-pid) specifies the attribute
 identifiers to be used for PIDs in [ISO/IEC 18013-5] format
 - the data identifiers in these tables are not necessarily the same as the claim
 names used for PIDs complying with [SD-JWT VC]. [Chapter 4](#4-sd-jwt-vc-based-encoding-of-pid) specifies the claim names to be used for such PIDs.
 
-Note that the data type for each attribute is not specified in this chapter, but in [Chapter 3](#3-iec-18013-5-compliant-encoding-of-pid) and [Chapter 4](#4-sd-jwt-vc-based-encoding-of-pid).
+Note that the data type for each attribute is not specified in this chapter, but in [Chapter 3](#3-isoiec-18013-5-compliant-encoding-of-pid) and [Chapter 4](#4-sd-jwt-vc-based-encoding-of-pid).
 
 ### 2.2 Mandatory attributes specified in CIR 2024/2977
 
