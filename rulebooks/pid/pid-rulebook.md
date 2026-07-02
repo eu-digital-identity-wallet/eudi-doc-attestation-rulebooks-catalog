@@ -28,9 +28,9 @@ Additionally, this document specifies further optional PID attributes that are
 not included in the CIR.
 
 This document also specifies how a PID and all attributes in it are encoded if
-the PID complies with [/IEC 18013-5] and if it complies with [SD-JWT VC].
+the PID complies with [ISO/IEC 18013-5] and if it complies with [SD-JWT VC].
 
-This PID Rulebook should be read in conjunction with the high-level requirements for PIDs in [Topic 3](https://github.com/eu-digital-identity-wallet/eudi-doc-architecture-and-reference-framework/blob/main/docs/annexes/annex-2/annex-2.02-high-level-requirements-by-topic.md#a232-topic-3---pid-rulebook) in Annex 2 of the Architecture Reference Framework. In particular, the values to be used for the namespace and document type for [/IEC 18013-5]-compliant PIDs and for the vct claim in [SD-JWT VC]-compliant PIDs are defined in Topic 3.
+This PID Rulebook should be read in conjunction with the high-level requirements for PIDs in [Topic 3](https://github.com/eu-digital-identity-wallet/eudi-doc-architecture-and-reference-framework/blob/main/docs/annexes/annex-2/annex-2.02-high-level-requirements-by-topic.md#a232-topic-3---pid-rulebook) in Annex 2 of the Architecture Reference Framework. In particular, the values to be used for the namespace and document type for [ISO/IEC 18013-5]-compliant PIDs and for the vct claim in [SD-JWT VC]-compliant PIDs are defined in Topic 3.
 
 Person identification data for the legal person is out of scope of this document.
 
@@ -44,7 +44,7 @@ of the content of this chapter is a direct copy of the Annex of Commission
 Implementing Regulation 2024/2977 on PID and EAA. However, a few additional
 attributes are specified in this chapter.
 - [Chapter 3](#3-iec-18013-5-compliant-encoding-of-pid) specifies how the PID
-attributes and metadata are encoded in case the PID complies with [/IEC
+attributes and metadata are encoded in case the PID complies with [ISO/IEC
 18013-5].
 - [Chapter 4](#4-sd-jwt-vc-based-encoding-of-pid) specifies how the PID
 attributes and metadata are encoded in case the PID complies with [SD-JWT VC].
@@ -86,8 +86,8 @@ All data identifiers and definitions in this chapter are independent of any
 encoding used. Consequently,
 
 - the data identifiers in these tables are not necessarily the same as the
-attribute identifiers used for PIDs complying with [/IEC 18013-5]. [Chapter 3](#3-iec-18013-5-compliant-encoding-of-pid) specifies the attribute
-identifiers to be used for PIDs in [/IEC 18013-5] format
+attribute identifiers used for PIDs complying with [ISO/IEC 18013-5]. [Chapter 3](#3-iec-18013-5-compliant-encoding-of-pid) specifies the attribute
+identifiers to be used for PIDs in [ISO/IEC 18013-5] format
 - the data identifiers in these tables are not necessarily the same as the claim
 names used for PIDs complying with [SD-JWT VC]. [Chapter 4](#4-sd-jwt-vc-based-encoding-of-pid) specifies the claim names to be used for such PIDs.
 
@@ -99,7 +99,7 @@ Note that the data type for each attribute is not specified in this chapter, but
 |------------------------|--------------|------------------|
 | family_name | Current last name(s) or surname(s) of the user to whom the person identification data relates. | 't Hart |
 | given_name | Current first name(s), including middle name(s) where applicable, of the user to whom the person identification data relates. | Jan Wijnand |
-| birth_date | Day, month, and year on which the user to whom the person identification data relates was born. If (partially) unknown, appropriate values complying with date formats in [/IEC 18013-5] or [SD-JWT VC], as appropriate. | 12-02-1978 |
+| birth_date | Day, month, and year on which the user to whom the person identification data relates was born. If (partially) unknown, appropriate values complying with date formats in [ISO/IEC 18013-5] or [SD-JWT VC], as appropriate. | 12-02-1978 |
 | birth_place | The country as an alpha-2 country code as specified in [ISO 3166-1], or the state, province, district, or local area or the municipality, city, town, or village where the user to whom the person identification data relates was born. | Amsterdam |
 | nationality | One or more alpha-2 country codes as specified in [ISO 3166-1], representing the nationality of the user to whom the person identification data relates. If unknown, value `QU`. If the user does not hold a nationality, value `QS`. | NL|
 | portrait | Except where the user explicitly opts out, where applicable, the facial image of the user to whom the person identification data relates, compliant with the quality requirements for a full frontal image type as set out in [ISO/IEC 39794-5] or, for backward compatibility, [ISO/IEC 19794-5], clauses 8.2, 8.3 and 8.4, provided as encoded image data without the headers or blocks as specified in clause 5 of [ISO/IEC 19794-5], except for the image data itself (a JPEG). Mandatory inclusion of the `portrait` attribute shall apply as of 24 months after entry into force of the Regulation amending [CIR 2024/2977]. In case the user opts out, empty, as specified in PID_03 in [Topic 3](https://github.com/eu-digital-identity-wallet/eudi-doc-architecture-and-reference-framework/blob/main/docs/annexes/annex-2/annex-2.02-high-level-requirements-by-topic.md#a232-topic-3---pid-rulebook) in Annex 2 of the ARF. | - |
