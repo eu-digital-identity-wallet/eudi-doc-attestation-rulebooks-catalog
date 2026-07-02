@@ -12,7 +12,7 @@ subtitle: "ARF Annex 3.01 - PID Rulebook"
 | 1.3 | 6 Nov 2025 | Adding references to sections in [SD-JWT VC] and [HAIP] in section 4.1.2. Completing changelog (from start of this repo). |
 | 1.4 | 20 Nov 2025 | Adding a reference to [Topic 3](https://github.com/eu-digital-identity-wallet/eudi-doc-architecture-and-reference-framework/blob/main/docs/annexes/annex-2/annex-2.02-high-level-requirements-by-topic.md#a232-topic-3---pid-rulebook) in Annex 2 of the ARF in section 1.1. Making the PID Rulebook fully consistent with the Rulebook template. |
 | 1.5 | 20 Jan 2026 | Processing Member State feedback; fixing broken links to ARF Topic 3 |
-| 1.6 | 01 Jul 2026 | Aligning with updated [CIR 2977], correcting typos. |
+| 1.6 | 01 Jul 2026 | Aligning with updated [CIR 2024/2977], correcting typos. |
 
 ## 1 Introduction
 
