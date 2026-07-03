@@ -344,7 +344,7 @@ accessible in a catalog.
 
 EXAMPLE: The following example shows the payload of a PID in SD-JWT VC format before the encoding into the SD-JWT format.
 
-``json
+```json
 {
     "vct": "urn:eudi:pid:de:1",
 
@@ -380,7 +380,7 @@ EXAMPLE: The following example shows the payload of a PID in SD-JWT VC format be
     "issuing_authority": "DE",
     "issuing_country": "DE"
 }
-``
+```
 
 Note: The `cnf` claim is used for expressing key binding in SD-JWT VCs.
 The example above shows a public key in JWK format.
