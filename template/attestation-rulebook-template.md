@@ -150,8 +150,8 @@ an indication, at least in a form suitable for automated processing, that the at
 has been issued as a QEAA or Pub-EAA SHALL be defined. Similarly, according to ARB_12
 of [Topic 12] of Annex 2 of the ARF a similar indication SHOULD be defined for non-qualified EAA.
 
-This document defines the attribute "attestation_legal_category" which SHALL have
-the value "QEAA" or "PuB-EAA" or "non-qualified-EAA".*
+[ETSI TS 119 472-1] defines the attribute "category" which can have
+the values " urn:etsi:esi:eaa:eu:qualified" or "urn:etsi:esi:eaa:eu:pub". For non-qualified attestations, no value is specified; this document therefore specifies the value "eaa:eu:non-qualified".
 
 *In the following subsections 2.1 - 2.7 define in an encoding independent manner all
 mandatory, optional, and conditional attributes and metadata. In each subsection
@@ -273,12 +273,12 @@ the applicable EU-wide or sectoral namespace (see ARB_10 in [Topic 12]).
 |------------------------|--------------|------------------|------------------|
 | family_name | family_name | tstr | com.example.att.1|
 
-*The corresponding entry for the "attestation_legal_category" attribute defined
-in Section 2.1 SHALL be:*
+*The corresponding entry for the "category" attribute defined
+in Section 2.1 SHALL be (see [ETSI TS 119 472-2], clause 6.2.2.1):*
 
 | **Data Identifier** | **Attribute identifier** | **Encoding format** |**Namespace**|
 |------------------------|--------------|------------------|------------------|
-| attestation_legal_category | attestation_legal_category | tstr |com.example.att.1|
+| category | category | tstr | org.etsi.01947201.010101 |
 
 Finally, illustrative examples SHALL be included.
 
@@ -340,12 +340,12 @@ example:*
 |---------------------|--------------------------|---------------------|-----------|---------------|
 | trust_anchor | trust_anchor | string | The trust anchor defined in Section 5 | MUST NOT |
 
-*The corresponding entry for the "attestation_legal_category" attribute defined
+*The corresponding entry for the "category" attribute defined
 in Section 2.1 SHALL be:*
 
 | **Data Identifier** | **Attribute identifier** | **Encoding format** | **Notes** |**Disclosable**|
 |---------------------|--------------------------|---------------------|-----------|---------------|
-| attestation_legal_category | attestation_legal_category | string | Defined in Attestation Rulebook template |MUST NOT|
+| category | category | string | Defined in [ETSI TS 119 472-1] |MUST NOT|
 
 Finally, illustrative examples SHALL be included.
 
