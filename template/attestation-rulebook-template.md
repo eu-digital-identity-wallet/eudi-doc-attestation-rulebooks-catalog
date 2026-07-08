@@ -4,7 +4,8 @@
 | 1.1 | 20-08-2025 | Allowing private names specific to the attestation type for JSON claims; adding requirements to specify whether a claim is selectively disclosable. |
 | 1.2 | 07-10-2025 | Fixing markdown issues; adding requirement to Chapter 4 regarding the need to specify whether an attestation is device-bound or non-device-bound. |
 | 1.3 | 02-12-2025 | Add complete change history; include the optional ``cryptographically_bound_to`` attribute specified in ARB_28; removed recommendation to define a JSON schema for SD-JWT VC-based attestations. |
-| 1.4 | 09-03-2026 | Fixing incorrect 'device-bound' working related to cryptographically_bound_to attribute in chapter 4. |
+| 1.4 | 09-03-2026 | Fixing incorrect 'device-bound' wording related to cryptographically_bound_to attribute in chapter 4. |
+| 1.5 | 08-07-2026 | Changing `attestation_legal_category` attribute to `category` for compliance with [ETSI TS 119 472-1], and changing its possible values accordingly. |
 
 # Attestation Rulebook for attestations of type  *ADD THE ATTESTATION TYPE HERE*
 
@@ -150,8 +151,8 @@ an indication, at least in a form suitable for automated processing, that the at
 has been issued as a QEAA or Pub-EAA SHALL be defined. Similarly, according to ARB_12
 of [Topic 12] of Annex 2 of the ARF a similar indication SHOULD be defined for non-qualified EAA.
 
-[ETSI TS 119 472-1] defines the attribute "category" which can have
-the values " urn:etsi:esi:eaa:eu:qualified" or "urn:etsi:esi:eaa:eu:pub". For non-qualified attestations, no value is specified; this document therefore specifies the value "eaa:eu:non-qualified".
+[ETSI TS 119 472-1] defines the attribute `category` which can have
+the values "urn:etsi:esi:eaa:eu:qualified" or "urn:etsi:esi:eaa:eu:pub". For non-qualified attestations, no value is specified; this document therefore specifies the value "eaa:eu:non-qualified".
 
 *In the following subsections 2.1 - 2.7 define in an encoding independent manner all
 mandatory, optional, and conditional attributes and metadata. In each subsection
