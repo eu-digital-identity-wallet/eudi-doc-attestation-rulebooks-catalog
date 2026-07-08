@@ -3,7 +3,7 @@
 | 1.0 | 24-06-2025 | First version |
 | 1.1 | 20-08-2025 | Allowing private names specific to the attestation type for JSON claims; adding requirements to specify whether a claim is selectively disclosable. |
 | 1.2 | 07-10-2025 | Fixing markdown issues; adding requirement to Chapter 4 regarding the need to specify whether an attestation is device-bound or non-device-bound. |
-| 1.3 | 02-12-2025 | Add complete change history; include the optional ``cryptographically_bound_to`` attribute specified in ARB_28; removed recommendation to define a JSON schema for SD-JWT VC-based attestations. |
+| 1.3 | 02-12-2025 | Add complete change history; include the optional `cryptographically_bound_to` attribute specified in ARB_28; removed recommendation to define a JSON schema for SD-JWT VC-based attestations. |
 | 1.4 | 09-03-2026 | Fixing incorrect 'device-bound' wording related to cryptographically_bound_to attribute in chapter 4. |
 | 1.5 | 08-07-2026 | Changing `attestation_legal_category` attribute to `category` for compliance with [ETSI TS 119 472-1], and changing its possible values accordingly. |
 
@@ -274,7 +274,7 @@ the applicable EU-wide or sectoral namespace (see ARB_10 in [Topic 12]).
 |------------------------|--------------|------------------|------------------|
 | family_name | family_name | tstr | com.example.att.1|
 
-*The corresponding entry for the "category" attribute defined
+*The corresponding entry for the `category` attribute defined
 in Section 2.1 SHALL be (see [ETSI TS 119 472-2], clause 6.2.2.1):*
 
 | **Data Identifier** | **Attribute identifier** | **Encoding format** |**Namespace**|
@@ -341,7 +341,7 @@ example:*
 |---------------------|--------------------------|---------------------|-----------|---------------|
 | trust_anchor | trust_anchor | string | The trust anchor defined in Section 5 | MUST NOT |
 
-*The corresponding entry for the "category" attribute defined
+*The corresponding entry for the `category` attribute defined
 in Section 2.1 SHALL be:*
 
 | **Data Identifier** | **Attribute identifier** | **Encoding format** | **Notes** |**Disclosable**|
