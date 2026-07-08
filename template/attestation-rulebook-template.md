@@ -407,22 +407,18 @@ SHALL be defined; see [Topic 20] of Annex 2 of the ARF.*
 *Mechanisms for the provision of a trust anchor that SHALL
 be used for the verification of an attestation SHALL be defined in this section.*
 
-*It is noted that the ARF specifies the following for QEAAs and Pub-EAAs:*
+*It is noted that Section 6.6.3.6 of the ARF main document specifies the following:*
 
-> To do this for [...] QEAAs the Relying Party Instance uses a trust anchor of
-the Provider obtained from a Trusted List. Note that the PID Provider or QEAA
-Provider may use an intermediate signing certificate to sign the PID or
-attestation, and use the trust anchor to sign the signing certificate, instead
-of signing the PID or attestation directly with the trust anchor.
->
-> For PuB-EAAs, the Relying Party Instance verifies a PuB-EAA by first
-verifying the signature of the PuB-EAA Provider over the PuB-EAA, using the
-PuB-EAA Provider certificate issued by a QTSP. Subsequently, the Relying Party
-Instance verifies the signature over this certificate, using the corresponding
-trust anchor from the QTSP Trusted List. Note that both the PuB-EAA Provider
-and the QTSP may use an intermediate signing certificate. All other things
-being equal, the verification of a PuB-EAA will therefore involve one or more
-extra certificates, compared to the verification of a PID or QEAA.
+> The Relying Party Instance receives a PID or attestation, including some
+attributes, from the Wallet Unit. Subsequently, it verifies the signature over
+the PID or attestation. To do this for PIDs, QEAAs, and PuB-EAAs, the Relying Party
+Instance uses a trust anchor of the Provider obtained from a LoTE or Trusted List. Note
+that the Provider may use an intermediate signing certificate to sign the PID or attestation, and use the trust anchor to sign the
+signing certificate, instead of signing the PID or attestation directly with the
+trust anchor.
+
+> For non-qualified EAAs, the applicable Rulebook may describe how the
+Relying Party Instance obtains the relevant trust anchor.
 
 *For non-qualified EAA in this section it SHOULD  be defined (see ARB_26 in [Topic 12])
 how the attributes or metadata representing the location at which a machine-readable
@@ -451,6 +447,8 @@ will never be necessary, or that the attestations are revocable.*
 that will be specified by the Commission.
 * Use an Attestation Revocation List mechanism included in a Technical Specification
 that will be specified by the Commission.
+
+*For revocable attestations, the URL at which Relying Parties and other entities can retrieve the relevant Attestation Status Lists or Attestation Revocation Lists SHALL be specified. This could be the domain name only, as the full URL containing the ASL or ARL relevant for an individual attestation will anyway be included in that attestation.*
 
 ## 7 Compliance
 
