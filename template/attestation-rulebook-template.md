@@ -5,7 +5,7 @@
 | 1.2 | 07-10-2025 | Fixing markdown issues; adding requirement to Chapter 4 regarding the need to specify whether an attestation is device-bound or non-device-bound. |
 | 1.3 | 02-12-2025 | Add complete change history; include the optional `cryptographically_bound_to` attribute specified in ARB_28; removed recommendation to define a JSON schema for SD-JWT VC-based attestations. |
 | 1.4 | 09-03-2026 | Fixing incorrect 'device-bound' wording related to cryptographically_bound_to attribute in chapter 4. |
-| 1.5 | 08-07-2026 | Changing `attestation_legal_category` attribute to `category` for compliance with [ETSI TS 119 472-1], and changing its possible values accordingly. |
+| 1.5 | 08-07-2026 | Changing `attestation_legal_category` attribute to `category` for compliance with [ETSI TS 119 472-1], and changing its possible values accordingly. Updated information regarding trust anchors. Added requirement regarding URLs of Attestation Status Lists or Attestation Revocation Lists. |
 
 # Attestation Rulebook for attestations of type  *ADD THE ATTESTATION TYPE HERE*
 
