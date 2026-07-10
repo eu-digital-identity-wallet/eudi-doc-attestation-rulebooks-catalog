@@ -3,8 +3,9 @@
 | 1.0 | 24-06-2025 | First version |
 | 1.1 | 20-08-2025 | Allowing private names specific to the attestation type for JSON claims; adding requirements to specify whether a claim is selectively disclosable. |
 | 1.2 | 07-10-2025 | Fixing markdown issues; adding requirement to Chapter 4 regarding the need to specify whether an attestation is device-bound or non-device-bound. |
-| 1.3 | 02-12-2025 | Add complete change history; include the optional ``cryptographically_bound_to`` attribute specified in ARB_28; removed recommendation to define a JSON schema for SD-JWT VC-based attestations. |
-| 1.4 | 09-03-2026 | Fixing incorrect 'device-bound' working related to cryptographically_bound_to attribute in chapter 4. |
+| 1.3 | 02-12-2025 | Add complete change history; include the optional `cryptographically_bound_to` attribute specified in ARB_28; removed recommendation to define a JSON schema for SD-JWT VC-based attestations. |
+| 1.4 | 09-03-2026 | Fixing incorrect 'device-bound' wording related to cryptographically_bound_to attribute in chapter 4. |
+| 1.5 | 08-07-2026 | Changing `attestation_legal_category` attribute to `category` for compliance with [ETSI TS 119 472-1], and changing its possible values accordingly. Updated information regarding trust anchors. Added requirement regarding URLs of Attestation Status Lists or Attestation Revocation Lists. |
 
 # Attestation Rulebook for attestations of type  *ADD THE ATTESTATION TYPE HERE*
 
@@ -150,8 +151,8 @@ an indication, at least in a form suitable for automated processing, that the at
 has been issued as a QEAA or Pub-EAA SHALL be defined. Similarly, according to ARB_12
 of [Topic 12] of Annex 2 of the ARF a similar indication SHOULD be defined for non-qualified EAA.
 
-This document defines the attribute "attestation_legal_category" which SHALL have
-the value "QEAA" or "PuB-EAA" or "non-qualified-EAA".*
+[ETSI TS 119 472-1] defines the attribute `category` which can have
+the values "urn:etsi:esi:eaa:eu:qualified" or "urn:etsi:esi:eaa:eu:pub". For non-qualified attestations, no value is specified; this document therefore specifies the value "eaa:eu:non-qualified".
 
 *In the following subsections 2.1 - 2.7 define in an encoding independent manner all
 mandatory, optional, and conditional attributes and metadata. In each subsection
@@ -273,12 +274,12 @@ the applicable EU-wide or sectoral namespace (see ARB_10 in [Topic 12]).
 |------------------------|--------------|------------------|------------------|
 | family_name | family_name | tstr | com.example.att.1|
 
-*The corresponding entry for the "attestation_legal_category" attribute defined
-in Section 2.1 SHALL be:*
+*The corresponding entry for the `category` attribute defined
+in Section 2.1 SHALL be (see [ETSI TS 119 472-2], clause 6.2.2.1):*
 
 | **Data Identifier** | **Attribute identifier** | **Encoding format** |**Namespace**|
 |------------------------|--------------|------------------|------------------|
-| attestation_legal_category | attestation_legal_category | tstr |com.example.att.1|
+| category | category | tstr | org.etsi.01947201.010101 |
 
 Finally, illustrative examples SHALL be included.
 
@@ -340,12 +341,12 @@ example:*
 |---------------------|--------------------------|---------------------|-----------|---------------|
 | trust_anchor | trust_anchor | string | The trust anchor defined in Section 5 | MUST NOT |
 
-*The corresponding entry for the "attestation_legal_category" attribute defined
+*The corresponding entry for the `category` attribute defined
 in Section 2.1 SHALL be:*
 
 | **Data Identifier** | **Attribute identifier** | **Encoding format** | **Notes** |**Disclosable**|
 |---------------------|--------------------------|---------------------|-----------|---------------|
-| attestation_legal_category | attestation_legal_category | string | Defined in Attestation Rulebook template |MUST NOT|
+| category | category | string | Defined in [ETSI TS 119 472-1] |MUST NOT|
 
 Finally, illustrative examples SHALL be included.
 
@@ -406,22 +407,18 @@ SHALL be defined; see [Topic 20] of Annex 2 of the ARF.*
 *Mechanisms for the provision of a trust anchor that SHALL
 be used for the verification of an attestation SHALL be defined in this section.*
 
-*It is noted that the ARF specifies the following for QEAAs and Pub-EAAs:*
+*It is noted that Section 6.6.3.6 of the ARF main document specifies the following:*
 
-> To do this for [...] QEAAs the Relying Party Instance uses a trust anchor of
-the Provider obtained from a Trusted List. Note that the PID Provider or QEAA
-Provider may use an intermediate signing certificate to sign the PID or
-attestation, and use the trust anchor to sign the signing certificate, instead
-of signing the PID or attestation directly with the trust anchor.
->
-> For PuB-EAAs, the Relying Party Instance verifies a PuB-EAA by first
-verifying the signature of the PuB-EAA Provider over the PuB-EAA, using the
-PuB-EAA Provider certificate issued by a QTSP. Subsequently, the Relying Party
-Instance verifies the signature over this certificate, using the corresponding
-trust anchor from the QTSP Trusted List. Note that both the PuB-EAA Provider
-and the QTSP may use an intermediate signing certificate. All other things
-being equal, the verification of a PuB-EAA will therefore involve one or more
-extra certificates, compared to the verification of a PID or QEAA.
+> The Relying Party Instance receives a PID or attestation, including some
+attributes, from the Wallet Unit. Subsequently, it verifies the signature over
+the PID or attestation. To do this for PIDs, QEAAs, and PuB-EAAs, the Relying Party
+Instance uses a trust anchor of the Provider obtained from a LoTE or Trusted List. Note
+that the Provider may use an intermediate signing certificate to sign the PID or attestation, and use the trust anchor to sign the
+signing certificate, instead of signing the PID or attestation directly with the
+trust anchor.
+
+> For non-qualified EAAs, the applicable Rulebook may describe how the
+Relying Party Instance obtains the relevant trust anchor.
 
 *For non-qualified EAA in this section it SHOULD  be defined (see ARB_26 in [Topic 12])
 how the attributes or metadata representing the location at which a machine-readable
@@ -450,6 +447,8 @@ will never be necessary, or that the attestations are revocable.*
 that will be specified by the Commission.
 * Use an Attestation Revocation List mechanism included in a Technical Specification
 that will be specified by the Commission.
+
+*For revocable attestations, the URL at which Relying Parties and other entities can retrieve the relevant Attestation Status Lists or Attestation Revocation Lists SHALL be specified. This could be the domain name only, as the full URL containing the ASL or ARL relevant for an individual attestation will anyway be included in that attestation.*
 
 ## 7 Compliance
 
