@@ -13,6 +13,7 @@ subtitle: "ARF Annex 3.01 - PID Rulebook"
 | 1.4 | 20 Nov 2025 | Adding a reference to [Topic 3](https://github.com/eu-digital-identity-wallet/eudi-doc-architecture-and-reference-framework/blob/main/docs/annexes/annex-2/annex-2.02-high-level-requirements-by-topic.md#a232-topic-3---pid-rulebook) in Annex 2 of the ARF in section 1.1. Making the PID Rulebook fully consistent with the Rulebook template. |
 | 1.5 | 20 Jan 2026 | Processing Member State feedback; fixing broken links to ARF Topic 3 |
 | 1.6 | 01 Jul 2026 | Aligning with updated [CIR 2024/2977], correcting typos. |
+| 1.7 | 17 Jul 2026 | Adding requirement that PID private key cannot be used for signing transactional data. |
 
 ## 1 Introduction
 
@@ -397,6 +398,8 @@ PID Providers issue PIDs to Wallet Units on request of Users, and revoke them if
 Relying Parties request attributes from a User's PID, and verify their authenticity and validity (including revocation status, if any).
 
 Users, PID Providers, and Relying Parties do this in compliance with all applicable requirements in the [European Digital Identity Regulation] and the corresponding Implementing Acts, as described in the ARF.
+
+Wallet Units SHALL NOT use a PID private key to sign transactional data received from a Relying Party in a presentation request.
 
 ## 6 Trust anchors
 
